@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load item_extras %}
+{% block content %}
+    <h2>You have {{items|length}} item{{items|pluralize}}</h2>
+    <div>
+        <table class="table">
+            <thead>
+               <tr>
+                <th>Name</th>
+                <th>price</th>
+                <th>Date create</th>
+                <th>Status</th>
+               </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr class="{{item|get_class}}">
+                    <td>{{item.name}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.created_at}}</td>
+                    <td>{{item|get_class}}</td>
+                </tr>
+                {% empty%}
+                <tr>
+                    no items
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'item:create-item' %}">Add item</a>
+    </div>
+{% endblock %}

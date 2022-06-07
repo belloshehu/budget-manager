@@ -4,12 +4,11 @@
 
 {% block content %}
     <h3>Login form</h3>
-    <form action="{% url 'tasks:login' %}" method="post">
+    <form action="{% url 'account:login' %}" method="post">
         {% csrf_token %}
         <table>{{form.as_table}}</table>
         <input type="submit" value="Login"/>
     </form>
-    <a href="{% url 'tasks:signup' %}">signup</a>
+    <a href="{% url 'account:signup' %}">signup</a>
     <hr>
-    <a href="{% url 'tasks:create' %}">Add task</a>
 {% endblock %}
