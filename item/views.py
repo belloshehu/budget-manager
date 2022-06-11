@@ -14,6 +14,11 @@ class ItemCreateView(generic.CreateView):
     template_name = "item/item_form.html"
     
 
+class ItemDetailView(generic.DetailView):
+    model = Item
+    
+    
+
 class ItemListView(generic.ListView):
     model = Item
     context_object_name = 'items'

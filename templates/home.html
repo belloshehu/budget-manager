@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} home {% endblock %}
+{% block content %}
+    <section class="landing">
+        <article class="landing-text">
+            <h1 class="landing-title">Manage errands in ease</h1>
+            <p class="landing-body">
+                Avoiding errors in errands is fully guaranteed easily and affordably.
+            </p>
+            <p class="landing-body">
+                We often find ourselves wanting to send person to get something on our behalf.
+                Most often, we eventually don't get satisfied due to the person's inability to recall what he was 
+                told. Writing can help in this case but the record can be lost or the parties 
+                cannot properly address the errands when something changes. 
+            </p>
+            <br>
+            <a href="{% url 'item:create-item' %}" class="btn landing-btn" style="margin-top: 2%;">create errands</a>
+        </article>
+        <article>
+            <img src="{% static 'images/landing-phone.png' %}" alt="landing-image" class="landing-image rounded">
+        </article>
+    </section>
+
+    <section class="errand-description">
+        <article class="errand-text">
+            <h3 class="title color-primary">Things you can do with errand</h3>
+            <p>
+                Errand helps you deal with any task someone can help you do. Both of you can track
+                the execution progress and when eventually the task is complete, you can mark it done 
+                and even get rid of it. 
+            </p>
+            <ul class="errand-items">
+                <li class="errand-item">You can manage what you wish someone to help you purchase</li>
+                <li class="errand-item">It may be a food item you wish to buy</li>
+                <li class="errand-item">Track progress of task someone is doing for you</li>
+            </ul>
+        </article>
+        <article class="errand-body">
+            <img src="{% static 'images/errand-phone-light2.png' %}" class="landing-image errand-image">
+        </article>
+    </section>
+    <section class="reviews">
+        <h3 style="color: white;" class="title color-secondary">What people say about "Errand"</h3>
+        <div class="reviews-container">
+            {% for review in reviews %}
+                {% include "reviews/review.html" %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

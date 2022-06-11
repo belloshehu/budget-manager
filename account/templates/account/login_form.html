@@ -3,12 +3,14 @@
 {% block title %}tasks list{% endblock %}
 
 {% block content %}
-    <h3>Login form</h3>
-    <form action="{% url 'account:login' %}" method="post">
-        {% csrf_token %}
-        <table>{{form.as_table}}</table>
-        <input type="submit" value="Login"/>
-    </form>
-    <a href="{% url 'account:signup' %}">signup</a>
-    <hr>
+    <section class="form-container">
+        <h3>Login</h3>
+        <form action="{% url 'account:login' %}" method="post">
+            {% csrf_token %}
+            <p>{{form.as_p}}</p>
+            <input type="submit" value="Login"/>
+        </form>
+        <br>
+        <a href="{% url 'account:signup' %}">signup</a>
+    </section>
 {% endblock %}

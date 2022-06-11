@@ -1,0 +1,16 @@
+{% block nav %}
+    <nav>
+        <ul class="nav-items">
+            <li class="nav-item"><a class="nav-link" href="#">home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">help</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">about us</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'account:dashboard' %}">my errands</a></li>
+            {% if user.authenticated %}
+                <li class="nav-item"><a class="nav-link" href="#">my errands</a></li>
+            {% endif %}
+        </ul>
+        <ul class="account-links">
+            <li class="btn"><a class="nav-link" style="color: white;" href="{% url 'account:login' %}">login</a></li>
+        </ul>
+    </nav>
+{% endblock %}

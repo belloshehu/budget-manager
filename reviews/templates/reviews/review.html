@@ -1,0 +1,8 @@
+<article class="review">
+    <img src="{{user.profile.photo.url|default:'static/images/avatar.jpg'}}" width="100" height="100" 
+        alt="{{review.name}}" 
+        class="floated-left shadow rounded"
+    />
+    <blockquote>{{review.content}}</blockquote>
+    <h4 class="primary review-author">{{review.user.username}} |<span class="time warning">{{review.created_at|date:"M, d Y"}}</span></h4>
+</article>

@@ -2,6 +2,8 @@ from django.shortcuts import render, reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from reviews.models import Review
+from item.models import Item
 
 
 def signup(request):
@@ -31,3 +33,12 @@ def signup(request):
 
 def profile(request):
     return render(request, 'account/profile.html')
+
+
+def home(request):
+    reviews = Review.objects.all()[:3]
+    return render(request, "home.html", {"reviews": reviews})
+
+def dashboard(request):
+    items = Item.objects.all()[:10]
+    return render(request, "account/dashboard.html", {"items": items})

@@ -1,0 +1,44 @@
+{% extends "account/dashboard_base.html" %}
+{% block content %}
+    <section class="details-container padding-main-x">
+        <header class="detail-header" style="margin-bottom: 20px;">
+            <img src="{{user.profile.photo.url|default:'/static/images/avatar.jpg'}}"
+                class="rounded shadow detail-image" width="100" height="100"
+            />
+            <div class="detail-text-container">
+                <h2 class="detail-name">{{item.name}}</h2>
+                <p>{{item.description}}</p>
+            </div>
+        </header>
+
+        <i class="fa-solid fa-share fa-xl"></i>
+        <strong>
+            Shared with {{item.share_set.all|length}} person{{item.share_set.all|pluralize}}
+            <!-- <span class="btn primary-color">&plus;</span> -->
+        </strong>
+        <article class="shared-users padding-main reviews-container">
+            {% for share in item.share_set.all %}
+                {% include "item/shared_user.html" %}
+            {% empty %}
+                <p>Item not shared yet.</p>
+            {% endfor %}
+        </article>
+
+        <hr>
+        <i class="fa-solid fa-comment"></i>
+        <strong>
+            {{item.comments.all|length}} comment{{item.comments.all|pluralize}}
+            <span class="btn primary-color">&plus;</span>
+        </strong>
+        <article class="reviews-container padding-main">
+            {% for comment in item.comments.all %}
+                {% include "item/comment.html" %}
+            {% empty %}
+                <p>no comment yet.</p>
+            {% endfor %}
+        </article>
+        <hr>
+        <a href="#" class="btn primary"><i class="fa-solid fa-share fa-xl"></i>Share</a>
+        <a href="#" class="btn primary"><i class="fa-solid fa-trash fa-xl"></i>Delete</a>
+    </section>
+{% endblock %}

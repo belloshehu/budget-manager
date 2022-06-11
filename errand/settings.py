@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
-    'item'
+    'item',
+    'sharing',
+    'reviews'
 ]
 
 MIDDLEWARE = [
@@ -124,5 +126,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 LOGIN_REDERECT_URL = '/accounts/profile'
 LOGOUT_REDIRECT_URL = '/accounts/login/'

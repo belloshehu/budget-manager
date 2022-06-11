@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+    <section class="dashboard-container">
+        <aside class="">
+            <ul class="item-aside">
+                <li class="nav-item hover-border">
+                    <i class="fa-solid fa-list fa-lg"></i>
+                    <a class="nav-link" href="#">All</a>
+                </li>
+                <li class="nav-item hover-border">
+                    <i class="fa-solid fa-share fa-lg"></i>
+                    <a class="nav-link" href="#">Shared</a>
+                </li>
+                <li class="nav-item hover-border">
+                    <i class="fa-solid fa-check fa-lg"></i>
+                    <a class="nav-link" href="#">Completed</a>
+                </li>
+            </ul>
+            <!-- <p style="margin: 20px 0px;"><a href="#" class="btn" >Add Item &plus;</a></p> -->
+        </aside>
+        <main class="items-main reviews-container padding-main-bottom padding-main-x overflow-y">
+            {% for item in  items %}
+                {% include "item/item.html" %}
+            {% endfor %}
+        </main>
+    </section>
+{% endblock %}

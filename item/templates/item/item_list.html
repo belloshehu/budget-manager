@@ -10,6 +10,7 @@
                 <th>price</th>
                 <th>Date create</th>
                 <th>Status</th>
+                <th>Accepted</th>
                </tr>
             </thead>
             <tbody>
@@ -19,6 +20,7 @@
                     <td>{{item.price}}</td>
                     <td>{{item.created_at}}</td>
                     <td>{{item|get_class}}</td>
+                    <td>{{item|get_acceptance}}</td>
                 </tr>
                 {% empty%}
                 <tr>
