@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'account',
     'item',
     'sharing',
-    'reviews'
+    'reviews',
+    'friendship',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDERECT_URL = '/accounts/profile'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# AUTH_USER_MODEL = 'account.User'

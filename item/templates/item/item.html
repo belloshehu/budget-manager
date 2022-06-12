@@ -3,11 +3,16 @@
         alt="{{review.name}}" 
         class="floated-left shadow rounded"
         />
-        <a class="" href="#"><i class="fa-solid fa-share fa-xl warning"></i></a>
-    <h4 class="primary review-author">{{item.name}} |<span class="time warning">{{item.created_at|date:"M, d Y"}}</span></h4>
-    <h6>Shared with:</h6>
+        <a class="" href=""><i class="fa-solid fa-share fa-xl warning"></i></a>
+    <h4 class="primary review-author">
+        <a href="{% url 'item:detail' item.id %}" class="btn-secondary">{{item.name}}</a>|
+        <span class="time warning">{{item.created_at|date:"M, d Y"}}</span>
+    </h4>
+    {% include "item/shared_with.html" with shared_with_users=item.share_set.all %}
     <div class="align-self-left">
-        <a href="{% url 'item:detail' item.id %}" class="btn">Details</a>
-        <a href="#" class="btn warning-bg">delete</a>
+        <a href="#" class="btn-gray">
+            <i class="fa-solid fa-trash-can"></i>
+            Delete
+        </a>
     </div>
 </article>

@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from reviews.models import Review
 from item.models import Item
-
+from friendship.models import Friendship
+from . import utils
 
 def signup(request):
     form = UserCreationForm()
@@ -40,5 +41,16 @@ def home(request):
     return render(request, "home.html", {"reviews": reviews})
 
 def dashboard(request):
-    items = Item.objects.all()[:10]
-    return render(request, "account/dashboard.html", {"items": items})
+    return render(request, "account/dashboard_item.html", 
+        utils.get_dashboard_contents(request)
+    )
+
+def dashboard_friendship(request):
+    return render(request, "account/dashboard_friendship.html", 
+        utils.get_dashboard_contents(request)
+    )
+
+def dashboard_friendship_requests(request):
+    return render(request, "account/dashboard_requests.html", 
+        utils.get_dashboard_contents(request)
+    )

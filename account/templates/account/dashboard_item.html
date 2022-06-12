@@ -1,0 +1,16 @@
+{% extends "account/dashboard_base.html" %}
+
+<!-- Make item link active -->
+{% block items_link %}
+<li class="nav-item hover-border active">
+    <i class="fa-solid fa-list fa-lg"></i>
+    <a class="nav-link" href="{% url 'account:dashboard' %}">Items 
+        <span class="badge primary-bg secondary">{{items|length}}</span>
+    </a>
+</li>
+{% endblock %}
+{% block dashboard_content %}
+    {% for item in  items %}
+        {% include "item/item.html" %}
+    {% endfor %}
+{% endblock %}

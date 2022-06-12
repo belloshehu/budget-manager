@@ -1,0 +1,18 @@
+{% extends "account/dashboard_base.html" %}
+
+<!-- make friendship link active -->
+{% block friendship_link %}
+    <li class="nav-item active">
+        <i class="fa-solid fa-check fa-lg"></i>
+        <a class="nav-link" href="{% url 'account:friendship' %}">Friends
+            <span class="badge primary-bg secondary">{{friendships|length}}</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block dashboard_content %}
+    {% for friendship in  friendships %}
+        {% include "friendship/friend.html" with friend=friendship %}
+    {% endfor %}
+
+{% endblock %}

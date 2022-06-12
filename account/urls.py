@@ -16,6 +16,9 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', views.profile, name='profile'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard-friendships/', views.dashboard_friendship, name='friendship'),
+    path('dashboard-requests/', views.dashboard_friendship_requests, name='requests'),
 ]
+
 if DEBUG:
     urlpatterns +=static(MEDIA_URL, documents_root=MEDIA_ROOT)

@@ -1,0 +1,18 @@
+{% extends "account/dashboard_base.html" %}
+
+<!-- make friendship link active -->
+{% block requests_link %}
+<li class="nav-item hover-border active">
+    <i class="fa-solid fa-check fa-lg"></i>
+    <a class="nav-link" href="#">Requests
+        <span class="badge primary-bg secondary">{{requests|length}}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block dashboard_content %}
+    {% for request in  requests %}
+       {% include "friendship/request.html" %}
+    {% endfor %}
+
+{% endblock %}

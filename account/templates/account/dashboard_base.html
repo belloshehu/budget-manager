@@ -1,6 +1,50 @@
 {% extends "base.html" %}
 {% block header %}
-    <header class="padding-main-x">
+    <header class="padding-main-x secondary-bg" style="padding-top: 10px;">
         {% include "brand.html" %}
     </header>
+{% endblock %}
+{% block content %}
+    <section class="dashboard-container">
+        <aside class="">
+            <ul class="item-aside">
+                {% block items_link %}
+                    <li class="nav-item hover-border">
+                        <i class="fa-solid fa-list fa-lg"></i>
+                        <a class="nav-link" href="{% url 'account:dashboard' %}">Items 
+                            <span class="badge primary-bg secondary">{{items|length}}</span>
+                        </a>
+                    </li>
+                {% endblock %}
+                <!-- <li class="nav-item hover-border">
+                    <i class="fa-solid fa-share fa-lg"></i>
+                    <a class="nav-link" href="#">Shared</a>
+                </li>
+                <li class="nav-item hover-border ">
+                    <i class="fa-solid fa-check fa-lg"></i>
+                    <a class="nav-link" href="#">Completed</a>
+                </li> -->
+                {% block friendship_link %}
+                    <li class="nav-item hover-border">
+                        <i class="fa-solid fa-check fa-lg"></i>
+                        <a class="nav-link" href="{% url 'account:friendship' %}">Friends
+                            <span class="badge primary-bg secondary">{{friendships|length}}</span>
+                        </a>
+                    </li>
+                {% endblock %}
+                {% block requests_link %}
+                    <li class="nav-item hover-border">
+                        <i class="fa-solid fa-check fa-lg"></i>
+                        <a class="nav-link" href="{% url 'account:requests' %}">Requests
+                            <span class="badge primary-bg secondary">{{requests|length}}</span>
+                        </a>
+                    </li>
+                {% endblock %}
+            </ul>
+            <!-- <p style="margin: 20px 0px;"><a href="#" class="btn" >Add Item &plus;</a></p> -->
+        </aside>
+        <main class="items-main reviews-container padding-main-bottom padding-main-x overflow-y">
+           {% block dashboard_content %}{% endblock %}
+        </main>
+    </section>
 {% endblock %}

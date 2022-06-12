@@ -3,11 +3,16 @@
         alt="{{review.name}}" 
         class="floated-left shadow rounded"
         />
-    <h4 class="primary review-author">{{share.target_user.username}} | Shared on
+    <!-- <h4 class="primary review-author">{{share.target_user.username}} | Shared on
         <span class="time warning"> {{share.created_at|date:"M, d Y"}}</span>
+    </h4> -->
+    <h4 class="primary review-author">
+        <a href="{% url 'item:detail' share.id %}" class="btn-secondary">{{share.target_user.username}}</a> |
+        <span class="time warning">Since {{share.created_at|date:"M, d Y"}}</span>
     </h4>
     <div class="align-self-left">
-        <a href="{% url 'item:detail' item.id %}" class="btn">Details</a>
-        <a href="#" class="btn warning-bg">Unshare</a>
+        <a href="#" class="btn-gray">
+            <i class="fa-solid fa-rotate-left"></i> Unshare
+        </a>
     </div>
 </article>
