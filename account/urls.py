@@ -17,8 +17,18 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard-friendships/', views.dashboard_friendship, name='friendship'),
-    path('dashboard-requests/', views.dashboard_friendship_requests, name='requests'),
+    path(
+        'dashboard-requests/',
+        views.dashboard_friendship_requests, 
+        name='requests'
+    ),
+    path(
+        'user/<int:pk>/', 
+        views.UserDetailView.as_view(), 
+        name='detail'
+    ),
 ]
+
 
 if DEBUG:
     urlpatterns +=static(MEDIA_URL, documents_root=MEDIA_ROOT)

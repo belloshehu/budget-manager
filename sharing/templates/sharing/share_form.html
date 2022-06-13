@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="form-container">
+        <!-- <h3>Share item </h3> -->
+        <small>
+            {% for error in forms.errors %}
+                {{error}}
+            {% endfor %}
+        </small>
+        <p>You are sharing: <span class="primary">{{item.name}}</span></p>
+        <form method="post" action="{% url 'sharing:share' item.id %}">
+            {% csrf_token %}
+            <h4>with</h4>
+            <!-- <p>{{form.as_p}}</p> -->
+            
+            <section class="target-users-container">
+                {% for target_user in target_users %}
+                    <div >
+                        <input type="radio" name="target_user" value="1"/>
+                        <span>Musa aliyu</span>
+                        <img src="{{user.profile.photo.url|default:'/static/images/avatar.jpg'}}" width="50" height="50"
+                        alt="{{review.name}}" 
+                        class="shadow rounded"
+                        />
+                    </div>
+                {% endfor %}
+            </section>
+            <input type="submit" value="Ok">
+            <a href="{% url 'item:detail' item.id %}" class="">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

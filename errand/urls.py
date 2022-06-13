@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('account.urls')),
     path('item/', include('item.urls')),
+    path('sharing/', include('sharing.urls')),
     path('', home_view)
 ]

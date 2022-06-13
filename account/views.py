@@ -5,7 +5,9 @@ from django.contrib import messages
 from reviews.models import Review
 from item.models import Item
 from friendship.models import Friendship
+from django.views import generic
 from . import utils
+from django.contrib.auth.models import User
 
 def signup(request):
     form = UserCreationForm()
@@ -54,3 +56,10 @@ def dashboard_friendship_requests(request):
     return render(request, "account/dashboard_requests.html", 
         utils.get_dashboard_contents(request)
     )
+
+class UserList(generic.ListView):
+    model = User
+
+
+class UserDetailView(generic.DetailView):
+    model = User

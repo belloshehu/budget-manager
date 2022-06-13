@@ -38,7 +38,7 @@
             {% endfor %}
         </article>
         <hr>
-        <a href="#" class="btn primary"><i class="fa-solid fa-share fa-xl"></i>Share</a>
+        <a href="{% url 'sharing:share' item.id %}" class="btn primary"><i class="fa-solid fa-share fa-xl"></i>Share</a>
         <a href="#" class="btn primary"><i class="fa-solid fa-trash fa-xl"></i>Delete</a>
     </section>
 {% endblock %}
