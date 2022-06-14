@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 from .models import Share
@@ -13,7 +14,7 @@ class ShareCreateView(generic.CreateView):
     View to allow user to share item with another user.
     """
     model = Share
-    fields = ('target_user',)
+    fields = ('target_users',)
 
     def get_success_url(self, *args, **kwargs):
         return reverse('item:detail', kwargs={'pk': self.kwargs.get('pk')})
@@ -29,14 +30,15 @@ class ShareCreateView(generic.CreateView):
 
         # set the select options by overiding the queryset
         # property of the form 
-        form.base_fields['target_user'].queryset = active_friends_queryset
+        form.base_fields['target_users'].queryset = active_friends_queryset
         return render(
             request,
             "sharing/share_form.html", 
             {
                 'item':item, 
                 'form': form,
-                'active_friendships': self.get_active_friendships()
+                'active_friendships': self.get_active_friendships(),
+                'target_users': active_friends_queryset
             }
         )
     
@@ -55,10 +57,10 @@ class ShareCreateView(generic.CreateView):
         return friends_ids
     
     def form_valid(self, form):
-        print(self.request.POST['target_user'])
         form.instance.user = self.request.user
-        form.instance.target_user = User.objects.get(id=self.request.POST.get('target_user'))
         form.instance.item = Item.objects.get(id=self.kwargs.get('pk'))
+        super().form_valid(form)
+        form.instance.target_users.set(User.objects.filter(id__in=form.cleaned_data.get('target_users')))
         return super().form_valid(form)
         
 
@@ -67,3 +69,39 @@ class ShareDeleteView(generic.DeleteView):
     View to unshare item with users.
     """
     model = Share
+    context_object_name = 'share'
+
+    def get(self, request, *args, **kwargs):
+        print(kwargs.items())
+        return super().get(args, kwargs)
+        # return render(request, "sharing/share_delete_confirm.html", )
+
+    def get_context_data(self, *args, **kwargs):
+        """
+        Add target user to the context.
+        """
+        context = super().get_context_data(*args, **kwargs)
+        context['target_user'] = self.get_target_user_object()
+        return context
+
+    def get_target_user_object(self):
+        """
+        Query target user that an item will be unshared with.
+        """
+        target_user_object = get_object_or_404(User, pk=self.kwargs.get('target_user_pk'))
+        return target_user_object
+
+    def post(self, *args, **kwargs):
+        """
+        Delete target user from a share. Delete share also there
+        is no target user associated with it.
+        """
+        share = self.get_object()
+        item_id = share.item.id
+        share.target_users.remove(self.get_target_user_object())
+        if len(share.target_users.all()) == 0:
+            # remove share instance when no target user is 
+            # associated with it.
+            share.delete()
+        return HttpResponseRedirect(reverse('item:detail', kwargs={'pk': item_id}))
+        

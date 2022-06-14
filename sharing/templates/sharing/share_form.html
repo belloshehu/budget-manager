@@ -7,22 +7,30 @@
                 {{error}}
             {% endfor %}
         </small>
-        <p>You are sharing: <span class="primary">{{item.name}}</span></p>
+        <p>You are sharing: <span class="primary"></span></p>
+        <div>
+            {% include "sharing/share_item.html" %}
+        </div>
+
         <form method="post" action="{% url 'sharing:share' item.id %}">
             {% csrf_token %}
-            <h4>with</h4>
-            <!-- <p>{{form.as_p}}</p> -->
-            
+            <h4 id=>with:</h4>
+            <ul id="selected-target-users">
+
+            </ul>
             <section class="target-users-container">
                 {% for target_user in target_users %}
-                    <div >
-                        <input type="radio" name="target_user" value="1"/>
-                        <span>Musa aliyu</span>
-                        <img src="{{user.profile.photo.url|default:'/static/images/avatar.jpg'}}" width="50" height="50"
+                    <article class="target-user" onclick="()=>{console.log('hello')}">
+                        <input id="checkbox-{{forloop.counter0}}" type="checkbox" name="target_users" value="{{target_user.id}}"/>
+                        <label id="label-{{forloop.counter0}}">{{target_user.username}}</label>
+                        <img src="{{target_user.profile.photo.url|default:'/static/images/avatar.jpg'}}" width="50" height="50"
                         alt="{{review.name}}" 
                         class="shadow rounded"
                         />
-                    </div>
+                    </article>
+                {% empty %}
+                    <small> You don't have any active friend</small>
+                    <a href="{% url 'account:friendship' %}" class="btn-secondary">Manage friends</a>
                 {% endfor %}
             </section>
             <input type="submit" value="Ok">

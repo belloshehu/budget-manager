@@ -15,7 +15,7 @@ class Share(models.Model):
     """
 
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    target_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    target_users = models.ManyToManyField(User)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 

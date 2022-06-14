@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="form-container">
+        <!-- <h3>Share item </h3> -->
+        <small>
+            {% for error in forms.errors %}
+                {{error}}
+            {% endfor %}
+        </small>
+        <p>You are unsharing: <span class="primary"></span></p>
+        <div>
+            {% include "sharing/share_item.html" with item=share.item %}
+        </div>
+
+        <form method="post" action="{% url 'sharing:delete' pk=share.id target_user_pk=target_user.id %}" >
+            {% csrf_token %}
+            <h4 id=>with:</h4>
+            <section class="target-users-container">
+                {% include 'friendship/user.html' with friend=target_user %}
+            </section>
+            <input type="submit" value="Ok">
+            <a href="{% url 'item:detail' share.item.id %}" class="">Cancel</a>
+        </form>
+    </div>
+{% endblock %}
