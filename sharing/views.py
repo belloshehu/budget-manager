@@ -88,7 +88,9 @@ class ShareDeleteView(generic.DeleteView):
         """
         Query target user that an item will be unshared with.
         """
-        target_user_object = get_object_or_404(User, pk=self.kwargs.get('target_user_pk'))
+        target_user_object = get_object_or_404(
+                User, pk=self.kwargs.get('target_user_pk')
+        )
         return target_user_object
 
     def post(self, *args, **kwargs):

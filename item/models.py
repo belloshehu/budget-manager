@@ -30,7 +30,7 @@ class Item(models.Model):
     done = models.BooleanField(default=False)
     photo = models.ImageField(upload_to='items')
     accepted = models.BooleanField(default=False)
-    comments = models.ManyToManyField(Comment)
+    comments = models.ManyToManyField(Comment, blank=True)
 
     def __str__(self):
         return self.name
