@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic 
 from item.models import Item
 from item.forms import ItemForm
@@ -10,9 +10,10 @@ class ItemCreateView(generic.CreateView):
     """
     View to handle request for creating Item.
     """
-    form_class = ItemForm
     model = Item
+    form_class = ItemForm
     template_name = "item/item_form.html"
+    success_url = reverse_lazy('account:dashboard')
 
     def form_valid(self, form):
         form.instance.owner = self.request.user

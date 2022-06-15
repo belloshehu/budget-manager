@@ -14,6 +14,8 @@
                         <a class="nav-link" href="{% url 'account:dashboard' %}">Items 
                             <span class="badge primary-bg secondary">{{items|length}}</span>
                         </a>
+                        <a class="nav-link primary-color" href="{% url 'item:create' %}"> &plus; Add
+                        </a>
                     </li>
                 {% endblock %}
                 <!-- <li class="nav-item hover-border">
@@ -43,8 +45,13 @@
             </ul>
             <!-- <p style="margin: 20px 0px;"><a href="#" class="btn" >Add Item &plus;</a></p> -->
         </aside>
-        <main class="items-main reviews-container padding-main-bottom padding-main-x overflow-y">
-           {% block dashboard_content %}{% endblock %}
-        </main>
+        <div>
+            <header class="dashboard primary-bg">
+                
+            </header>
+            <main class="items-main reviews-container padding-main-bottom padding-main-x overflow-y">
+                {% block dashboard_content %}{% endblock %}
+            </main>
+        </div>
     </section>
 {% endblock %}

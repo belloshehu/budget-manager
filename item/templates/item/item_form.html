@@ -4,7 +4,7 @@
 {% block content %}
     <section class="form-container">
         <h3>New Item</h3>
-        <form action="{% url 'item:create-item' %}" method="post">
+        <form action="{% url 'item:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{form.as_p}}</p>
             <input type="submit" value="Submit"/>

@@ -7,6 +7,8 @@
     <a class="nav-link" href="{% url 'account:dashboard' %}">Items 
         <span class="badge primary-bg secondary">{{items|length}}</span>
     </a>
+    <a class="nav-link primary-color" href="{% url 'item:create' %}"> &plus; Add
+    </a>
 </li>
 {% endblock %}
 {% block dashboard_content %}
