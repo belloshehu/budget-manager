@@ -6,6 +6,7 @@
 :root{
     --primary-color: rgb(0, 100, 100);
     --secondary-color: white;
+    --danger-color: rgb(177, 7, 7);
     --padding: 10px;
     --vertal-padding: 10px;
     --horizontal-padding: 20px;
@@ -14,6 +15,7 @@
     --nav-link-font-weight: bold;
     --nav-link-font-size: 1.2rem;
     --border-thickness: 5px;
+    --btn-border-thickness: 2px;
     --main-padding: 5%;
     --border-radius-round: 50%;
     --margin: 20px;
@@ -504,7 +506,22 @@ input[type=submit] {
 .btn-block {
     display: block;
 }
-
+.btn-bordered-primary{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: var(--btn-border-thickness) solid var(--primary-color);
+    padding: var(--vertal-padding) var(--horizontal-padding);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+}
+.btn-bordered-danger{
+    background-color: var(--secondary-color);
+    color: var(--danger-color);
+    border: var(--btn-border-thickness) solid var(--danger-color);
+    padding: var(--vertal-padding) var(--horizontal-padding);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+}
 .landing-btn:hover {
     transition: all 1s linear;
     transform: scale(1.2);

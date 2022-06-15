@@ -1,5 +1,5 @@
 <article class="review">
-    <img src="{{user.profile.photo.url|default:'/static/images/avatar.jpg'}}" width="100" height="100"
+    <img src="{{item.photo.url|default:'/static/images/avatar.jpg'}}" width="100" height="100"
         alt="{{review.name}}" 
         class="floated-left shadow rounded"
         />
@@ -10,9 +10,9 @@
     </h4>
     {% include "item/shared_with.html" with shared_with_users=item.share_set.all %}
     <div class="align-self-left">
-        <a href="#" class="btn-gray">
-            <i class="fa-solid fa-trash-can"></i>
-            Delete
+
+        <a href="{% url 'item:delete' item.id %}" class="btn-gray">
+            <i class="fa-solid fa-trash fa-xl"></i> Delete
         </a>
     </div>
 </article>

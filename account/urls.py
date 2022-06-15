@@ -1,7 +1,6 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from . import views
-from errand.settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 from django.conf.urls.static import static
 
 
@@ -28,7 +27,3 @@ urlpatterns = [
         name='detail'
     ),
 ]
-
-
-if DEBUG:
-    urlpatterns +=static(MEDIA_URL, documents_root=MEDIA_ROOT)

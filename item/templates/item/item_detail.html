@@ -38,7 +38,8 @@
             {% endfor %}
         </article>
         <hr>
-        <a href="{% url 'sharing:share' item.id %}" class="btn primary"><i class="fa-solid fa-share fa-xl"></i>Share</a>
+        <a href="{% url 'sharing:share' item.id %}" class="btn-bordered-primary"><i class="fa-solid fa-share fa-xl"></i>Share</a>
+        <a href="{% url 'item:update' item.id %}" class="btn-bordered-primary"><i class="fa-solid fa-pencil fa-xl"></i>Edit</a>
         <a href="{% url 'item:delete' item.id %}" class="btn primary"><i class="fa-solid fa-trash fa-xl"></i>Delete</a>
     </section>
 {% endblock %}
