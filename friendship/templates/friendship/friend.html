@@ -11,8 +11,14 @@
         <a href="{% url 'friendship:unfriend' friend.id %}" class="btn-gray">
             <i class="fa-solid fa-rotate-left"></i> Unfriend
         </a>
-        <a href="#" class="btn-gray">
-            <i class="fa-solid fa-ban"></i> Block
+        <a href="{% url 'friendship:block' friendship.id %}" class="btn-gray">
+            <i class="fa-solid fa-ban"></i> 
+            {% if friendship.blocked %}
+                Unblock 
+            {% else %}
+                Block
+            {% endif %}
         </a>
+       
     </div>
 </article>

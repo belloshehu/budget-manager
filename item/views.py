@@ -44,9 +44,5 @@ class ItemUpdateView(generic.UpdateView):
     form_class = ItemForm
     template_name = 'item/item_update.html'
 
-    def form_invalid(self, form):
-        print(form)
-        return super().form_invalid(form)
-
     def get_success_url(self, *args, **kwargs):
         return reverse('item:detail', kwargs={'pk': self.kwargs.get('pk')})

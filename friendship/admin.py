@@ -8,7 +8,8 @@ class FriendshipAdmin(admin.ModelAdmin):
         "user",
         "friend",
         "status",
-        "created_at"
+        "created_at",
+        'blocked'
     ]
 admin.site.register(Friendship, FriendshipAdmin)
 
