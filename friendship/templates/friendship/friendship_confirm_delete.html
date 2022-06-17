@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}unfriend{% endblock %}
+
+{% block content %}
+    <section class="form-container">
+        <h3>Do you want to unfriend</h3>
+        <div>
+            {% include "friendship/user.html" with friend=friendship %}
+        </div>
+        <form action="{% url 'friendship:unfriend' friendship.id %}" method="post">
+            {% csrf_token %}
+            <!-- <p>{{form.as_p}}</p> -->
+            <input type="submit" value="Yes"/>
+            <a href="{% url 'account:friendship' %}">No</a>
+        </form>
+    </section>
+{% endblock %}
