@@ -64,3 +64,4 @@ class UserList(generic.ListView):
 
 class UserDetailView(generic.DetailView):
     model = User
+    template_name = 'account/user_detail.html'
