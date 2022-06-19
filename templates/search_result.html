@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} search results{% endblock %}
+{%  block content %}
+    <section class="reviews-container padding-main">
+        {% for user in users %}
+            {% include 'account/user.html' %}
+        {% empty %}
+            <h3>No user with username <q>{{username}}</q></h3>
+        {% endfor %}
+    </section>
+{% endblock %}

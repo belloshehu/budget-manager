@@ -13,5 +13,10 @@ urlpatterns = [
         'block/<int:pk>/',
         views.BlockUnblockUserView.as_view(),
         name='block'
+    ),
+    path(
+        'search/',
+        views.friend_search,
+        name='search'
     )
 ]

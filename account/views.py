@@ -57,6 +57,7 @@ def dashboard_friendship_requests(request):
         utils.get_dashboard_contents(request)
     )
 
+
 class UserList(generic.ListView):
     model = User
 

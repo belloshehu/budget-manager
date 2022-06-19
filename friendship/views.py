@@ -3,7 +3,7 @@ from django.views import generic
 from django.urls import reverse_lazy, reverse
 from .models import Friendship
 from django.http import HttpResponseRedirect
-
+from django.contrib.auth.models import User
 # Create your views here.
 class FriendshipListView(generic.ListView):
     model = Friendship
@@ -46,3 +46,13 @@ class BlockUnblockUserView(generic.UpdateView):
         return HttpResponseRedirect(reverse('account:friendship'))
 
 
+def friend_search(request):
+    """ 
+    Searches for a friend with matching or resembling username. 
+    """
+    users = User.objects.filter(username__icontains = request.GET.get('username'))
+    return render(
+        request, 
+        "search_result.html", 
+        {"users": users, "username": request.GET.get('username')}
+    )

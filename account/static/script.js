@@ -1,6 +1,20 @@
 const targetUserNames = document.getElementsByClassName('target-user');
 const selectedTargetUsersList = document.querySelector('#selected-target-users')
 
+// search form
+let username = ''
+const searchForm = document.querySelector('.search-form');
+// search input
+const searchUsername = document.querySelector('#search-username');
+searchUsername.addEventListener('change', ()=>{username = searchUsername.value})
+
+searchForm.addEventListener('submit', (e)=>{
+    e.preventDefault = false;
+    console.log(username)
+    searchUsername.value = username;
+
+})
+
 console.log(targetUserNames)
 
 for(let index = 0; index < targetUserNames.length; index++){
@@ -25,3 +39,4 @@ function createTargetUserItem(label, index){
     li.innerHTML = label;
     return li
 }
+
