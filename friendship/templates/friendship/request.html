@@ -1,20 +1,16 @@
+{% load friendship_extras %}
 <article class="review">
     <img src="{{friendship_request.friendship.friend.profile.photo.url|default:'/static/images/avatar.jpg'}}" width="100" height="100"
         alt="{{review.name}}" 
         class=" shadow rounded"
         />
     <h4 class="primary review-author">
-        <a href="#" class="btn-secondary">
+        <a href="{% url 'account:detail' friendship_request.friendship.friend.id %}" class="btn-secondary">
             {{friendship_request.friendship.friend.username}}
         </a> |
         <span class="time warning">Since {{friendship_request.created_at|date:"M, d Y"}}</span>
     </h4>
     <div class="align-self-left">
-        <a href="#" class="btn-gray">
-            <i class="fa-solid fa-check"></i> Accept
-        </a>
-        <a href="#" class="btn-gray">
-            <i class="fa-solid fa-arrow-turn-down"></i> Reject
-        </a>
+        {% request_status_action_tag friendship_request.friendship %}
     </div>
 </article>

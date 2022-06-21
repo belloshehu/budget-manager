@@ -21,7 +21,7 @@
              
                 {% block friendship_link %}
                     <li class="nav-item hover-border">
-                        <i class="fa-solid fa-check fa-lg"></i>
+                        <i class="fa-solid fa-user fa-lg"></i>
                         <a class="nav-link" href="{% url 'account:friendship' %}">Friends
                             <span class="badge primary-bg secondary">{{friendships|length}}</span>
                         </a>
@@ -29,7 +29,7 @@
                 {% endblock %}
                 {% block requests_link %}
                     <li class="nav-item hover-border">
-                        <i class="fa-solid fa-check fa-lg"></i>
+                        <i class="fa-solid fa-code-pull-request"></i>
                         <a class="nav-link" href="{% url 'account:requests' %}">Requests
                             <span class="badge primary-bg secondary">{{friendship_requests|length}}</span>
                         </a>

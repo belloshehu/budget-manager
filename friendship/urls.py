@@ -23,5 +23,10 @@ urlpatterns = [
         'request/<int:pk>/<int:friend_id>/',
         views.CreateFriendshipRequest.as_view(),
         name='request'
+    ),
+    path(
+        'accept/<int:friend_id>/',
+        views.AcceptFriendshipRequest.as_view(),
+        name='accept'
     )
 ]
