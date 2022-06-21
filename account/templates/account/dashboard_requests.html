@@ -4,15 +4,14 @@
 {% block requests_link %}
 <li class="nav-item hover-border active">
     <i class="fa-solid fa-check fa-lg"></i>
-    <a class="nav-link" href="#">Requests
-        <span class="badge primary-bg secondary">{{requests|length}}</span>
+    <a class="nav-link" href="{% url 'account:requests' %}">Requests
+        <span class="badge primary-bg secondary">{{friendship_requests|length}}</span>
     </a>
 </li>
 {% endblock %}
 
 {% block dashboard_content %}
-    {% for request in  requests %}
+    {% for friendship_request in friendship_requests %}
        {% include "friendship/request.html" %}
     {% endfor %}
-
 {% endblock %}

@@ -18,5 +18,10 @@ urlpatterns = [
         'search/',
         views.friend_search,
         name='search'
+    ),
+    path(
+        'request/<int:pk>/<int:friend_id>/',
+        views.CreateFriendshipRequest.as_view(),
+        name='request'
     )
 ]

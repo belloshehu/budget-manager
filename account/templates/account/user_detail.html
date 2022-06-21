@@ -13,6 +13,6 @@
                 {% endif %}
             </div>
         </header>
-        <a href="#" class="btn-bordered-primary"><i class="fa-solid fa-share fa-xl"></i>Send friend request</a>
+        <a href="{% url 'friendship:request' pk=request.user.id friend_id=user.id %}" class="btn-bordered-primary"><i class="fa-solid fa-share fa-xl"></i>Send friend request</a>
     </section>
 {% endblock %}

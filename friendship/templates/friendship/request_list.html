@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} request list {% endblock %}
+{% block content %}
+    <h3>Requests</h3>
+    <section class="reviews-container padding-main-x">
+        {% for friendship_request in friendship_requests %}
+            {% include "friendship/request.html" %}
+        {% endfor %}
+    </section>
+{% endblock %}

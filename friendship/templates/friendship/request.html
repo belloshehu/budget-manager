@@ -1,11 +1,13 @@
 <article class="review">
-    <img src="{{user.profile.photo.url|default:'/static/images/avatar.jpg'}}" width="100" height="100"
+    <img src="{{friendship_request.friendship.friend.profile.photo.url|default:'/static/images/avatar.jpg'}}" width="100" height="100"
         alt="{{review.name}}" 
         class=" shadow rounded"
         />
     <h4 class="primary review-author">
-        <a href="{% url 'item:detail' request.id %}" class="btn-secondary">{{request.friend.username}}</a> |
-        <span class="time warning">Since {{request.created_at|date:"M, d Y"}}</span>
+        <a href="#" class="btn-secondary">
+            {{friendship_request.friendship.friend.username}}
+        </a> |
+        <span class="time warning">Since {{friendship_request.created_at|date:"M, d Y"}}</span>
     </h4>
     <div class="align-self-left">
         <a href="#" class="btn-gray">

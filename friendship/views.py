@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.views import generic
+from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.views import generic, View
 from django.urls import reverse_lazy, reverse
-from .models import Friendship
+from .models import Friendship, FriendshipRequest
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 # Create your views here.
@@ -56,3 +56,51 @@ def friend_search(request):
         "search_result.html", 
         {"users": users, "username": request.GET.get('username')}
     )
+
+# Friendship Request views
+
+class CreateFriendshipRequest(View):
+    """
+    View to handle friendship request. 
+    """
+    model = FriendshipRequest
+    template_name = 'friendship/request_list.html'
+
+    def get(self, request, **kwargs):
+        """
+        Create intance of friendship for a user with matching id. 
+        Ensure user does not send more than 1 request.
+        """
+        # create a friendship instance for a user with matching id
+        friend_id = self.kwargs.get('friend_id')
+        friend = get_object_or_404(User, id=friend_id)
+        friendship = Friendship.objects.create(user=request.user, friend=friend)
+
+        # check if user has an existing request
+        friendship_requests = self.get_existing_friend_request()
+        if friendship and len(friendship_requests)==0  and self.request.user.id != friend_id:
+            friend_request = FriendshipRequest.objects.create(friendship=friendship)
+        friendship_requests = self.get_friendship_requests()
+        return render(
+            request,
+            self.template_name, 
+            {"friend_requests": friendship_requests}
+        )
+
+    def get_existing_friendship_requests(self):
+        friendship_requests = FriendshipRequest.objects.filter(
+            friendship__friend__id=self.kwargs.get('friend_id'),
+            friendship__user=self.request.user
+        )
+        print(friendship_requests)
+        return friendship_requests
+
+    def get_friendship_requests(self):
+        """
+        Returns all users friendship requests.
+        """
+        return get_list_or_404(
+            FriendshipRequest, 
+            friendship__user=self.request.user,
+        )
+

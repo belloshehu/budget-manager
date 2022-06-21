@@ -28,22 +28,16 @@ class Friendship(models.Model):
         return super().save(*args, **kwargs)
 
 
-# class FriendshipRequest(models.Model):
-#     """
-#     Model to represent friendship request 
-#     sent to from one user to another.
-#     """
-#     REQUEST_STATUS = (
-#         ('PN', 'PENDING'),
-#         ('RE', 'REJECTED'),
-#         ('AC', 'ACCEPTED')
-#     )
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     status = models.CharField(max_length=50, choices=REQUEST_STATUS, default='PENDING')
-#     friendship = models.ForeignKey(Friendship, on_delete=models.CASCADE)
+class FriendshipRequest(models.Model):
+    """
+    Model to represent friendship request 
+    sent to from one user to another.
+    """
+    created_at = models.DateTimeField(auto_now_add=True)
+    friendship = models.ForeignKey(Friendship, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return f"{self.status} request."
+    def __str__(self):
+        return f"From {self.friendship.user.username} to {self.friendship.friend.username}"
 
-#     class Meta:
-#         ordering = ["created_at"]
+    class Meta:
+        ordering = ["created_at"]
