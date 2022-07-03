@@ -3,7 +3,10 @@ from django.views import generic, View
 from django.urls import reverse_lazy, reverse
 from .models import Friendship, FriendshipRequest
 from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.auth import get_user_model
+
+
 # Create your views here.
 class FriendshipListView(generic.ListView):
     model = Friendship
@@ -50,7 +53,9 @@ def friend_search(request):
     """ 
     Searches for a friend with matching or resembling username. 
     """
-    users = User.objects.filter(username__icontains = request.GET.get('username'))
+    users = get_user_model().objects.filter(
+        username__icontains = request.GET.get('username')
+    )
     return render(
         request, 
         "search_result.html", 
@@ -73,7 +78,7 @@ class CreateFriendshipRequest(View):
         """
         # create a friendship instance for a user with matching id
         friend_id = self.kwargs.get('friend_id')
-        friend = get_object_or_404(User, id=friend_id)
+        friend = get_object_or_404(settings.AUTH_USER_MODEL, id=friend_id)
         friendship = Friendship.objects.create(user=request.user, friend=friend)
 
         # check if user has an existing request
@@ -111,7 +116,7 @@ class AcceptFriendshipRequest(View):
 
     def get(self, request, **kwargs):
         friend_id = self.kwargs.get('friend_id')
-        friend = get_object_or_404(User, id=friend_id)
+        friend = get_object_or_404(settings.AUTH_USER_MODEL, id=friend_id)
         friendship = self.get_friendship()
         
         # update friendship

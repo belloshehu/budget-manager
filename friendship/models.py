@@ -13,11 +13,23 @@ class Friendship(models.Model):
         ('RE', 'REJECTED'),
         ('AC', 'ACCEPTED')
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
-    friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name="receiver")
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE, 
+        related_name="sender"
+    )
+    friend = models.OneToOneField(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE, 
+        related_name="receiver"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     blocked = models.BooleanField(default=False)
-    status = models.CharField(max_length=50, choices=REQUEST_STATUS, default='PENDING')
+    status = models.CharField(
+        max_length=50, 
+        choices=REQUEST_STATUS, 
+        default='PENDING'
+    )
 
     def __str__(self):
         return f" Friendship with {self.friend.username}"

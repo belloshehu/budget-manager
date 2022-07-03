@@ -1,6 +1,6 @@
 from django.db import models
 from item.models import Item
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.urls import reverse
 
 # Create your models here.
@@ -15,7 +15,7 @@ class Share(models.Model):
     """
 
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    target_users = models.ManyToManyField(User)
+    target_users = models.ManyToManyField(settings.AUTH_USER_MODEL)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
