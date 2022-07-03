@@ -1,0 +1,19 @@
+{% extends "account/dashboard_base.html" %}
+
+<!-- make friendship link active -->
+{% block sent_requests_link %}
+<li class="nav-item hover-border active">
+    <i class="fa-solid fa-paper-plane"></i>
+    <a class="nav-link" href="{% url 'account:sent-requests' %}">Requests
+        <span class="badge primary-bg secondary">{{sent_friendship_requests|length}}</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block dashboard_content %}
+    {% for friendship_request in sent_friendship_requests %}
+       {% include "friendship/request.html" %}
+    {% empty %}
+        <p>You have not sent any friend request.</p>
+    {% endfor %}
+{% endblock %}

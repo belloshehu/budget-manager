@@ -17,9 +17,14 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard-friendships/', views.dashboard_friendship, name='friendship'),
     path(
-        'dashboard-requests/',
-        views.dashboard_friendship_requests, 
-        name='requests'
+        'dashboard-sent-requests/',
+        views.dashboard_sent_friendship_requests, 
+        name='sent-requests'
+    ),
+    path(
+        'dashboard-received-requests/',
+        views.dashboard_received_friendship_requests, 
+        name='received-requests'
     ),
     path(
         'user/<int:pk>/', 

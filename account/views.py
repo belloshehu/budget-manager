@@ -6,8 +6,10 @@ from reviews.models import Review
 from item.models import Item
 from friendship.models import Friendship
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 from . import utils
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     form = UserCreationForm()
@@ -33,7 +35,7 @@ def signup(request):
     else:
         return render(request, 'account/signup_form.html', {'form':form})
 
-
+@login_required
 def profile(request):
     return render(request, 'account/profile.html')
 
@@ -42,18 +44,27 @@ def home(request):
     reviews = Review.objects.all()[:3]
     return render(request, "home.html", {"reviews": reviews})
 
+@login_required
 def dashboard(request):
     return render(request, "account/dashboard_item.html", 
         utils.get_dashboard_contents(request)
     )
 
+@login_required
 def dashboard_friendship(request):
     return render(request, "account/dashboard_friendship.html", 
         utils.get_dashboard_contents(request)
     )
 
-def dashboard_friendship_requests(request):
-    return render(request, "account/dashboard_requests.html", 
+@login_required
+def dashboard_sent_friendship_requests(request):
+    return render(request, "account/dashboard_sent_requests.html", 
+        utils.get_dashboard_contents(request)
+    )
+
+@login_required
+def dashboard_received_friendship_requests(request):
+    return render(request, "account/dashboard_received_requests.html", 
         utils.get_dashboard_contents(request)
     )
 
@@ -62,6 +73,6 @@ class UserList(generic.ListView):
     model = User
 
 
-class UserDetailView(generic.DetailView):
+class UserDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'account/user_detail.html'

@@ -8,12 +8,14 @@ def get_dashboard_contents(request):
     items = Item.objects.all()
     if request.user.is_authenticated:
         # friendship_requests = Friendship.objects.all().filter(status__iexact='PN')
-        friendship_requests = FriendshipRequest.objects.filter(friendship__user=request.user)
+        sent_friendship_requests = FriendshipRequest.objects.filter(friendship__user=request.user)
+        received_friendship_requests = FriendshipRequest.objects.filter(friendship__friend=request.user)
         friendships = Friendship.objects.filter(user__id=request.user.id, status__iexact='AC')
     return {
         "items": items, 
         "friendships": friendships, 
-        "friendship_requests": friendship_requests,
+        "sent_friendship_requests": sent_friendship_requests,
+        "received_friendship_requests": received_friendship_requests,
     }
 
     
