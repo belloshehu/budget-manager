@@ -1,5 +1,5 @@
 # budget-manager
-System to allow people to manage their budgets buy creating items, sharing items with others (i.e. friends). 
+System to allow people to manage their budgets by creating items, sharing items with others (i.e. friends). 
 Users can sent friend request to another user so they can share budgets or items in their budgets. 
 
 ## How to run it locally on your machine:
