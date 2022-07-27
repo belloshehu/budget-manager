@@ -1,10 +1,10 @@
-{% extends "account/dashboard_base.html" %}
+{% extends "custom_account/dashboard_base.html" %}
 
 <!-- Make item link active -->
 {% block items_link %}
 <li class="nav-item hover-border active">
     <i class="fa-solid fa-list fa-lg"></i>
-    <a class="nav-link" href="{% url 'account:dashboard' %}">Items 
+    <a class="nav-link" href="{% url 'custom_account:dashboard' %}">Items 
         <span class="badge primary-bg secondary">{{items|length}}</span>
     </a>
     <a class="nav-link primary-color" href="{% url 'item:create' %}"> &plus; Add

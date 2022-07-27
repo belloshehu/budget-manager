@@ -8,7 +8,7 @@ from friendship.models import Friendship
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . import utils
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
 def signup(request):
@@ -20,7 +20,7 @@ def signup(request):
             password2 = request.POST.get('password2')
             print(password1, password2)
             form.save(commit=True)
-            return HttpResponseRedirect(reverse('account:login'))
+            return HttpResponseRedirect(reverse('custom_account:login'))
         return render(request, 'account/signup_form.html', {'form':form})
         # if form.is_valid():
         #     form.clean()
@@ -33,11 +33,11 @@ def signup(request):
         #     form.save()
         #     return HttpResponseRedirect(reverse('account:login'))
     else:
-        return render(request, 'account/signup_form.html', {'form':form})
+        return render(request, 'custom_account/signup_form.html', {'form':form})
 
 @login_required
 def profile(request):
-    return render(request, 'account/profile.html')
+    return render(request, 'custom_account/profile.html')
 
 
 def home(request):
@@ -46,33 +46,33 @@ def home(request):
 
 @login_required
 def dashboard(request):
-    return render(request, "account/dashboard_item.html", 
+    return render(request, "custom_account/dashboard_item.html", 
         utils.get_dashboard_contents(request)
     )
 
 @login_required
 def dashboard_friendship(request):
-    return render(request, "account/dashboard_friendship.html", 
+    return render(request, "custom_account/dashboard_friendship.html", 
         utils.get_dashboard_contents(request)
     )
 
 @login_required
 def dashboard_sent_friendship_requests(request):
-    return render(request, "account/dashboard_sent_requests.html", 
+    return render(request, "custom_account/dashboard_sent_requests.html", 
         utils.get_dashboard_contents(request)
     )
 
 @login_required
 def dashboard_received_friendship_requests(request):
-    return render(request, "account/dashboard_received_requests.html", 
+    return render(request, "custom_account/dashboard_received_requests.html", 
         utils.get_dashboard_contents(request)
     )
 
 
 class UserList(generic.ListView):
-    model = User
+    model = get_user_model()
 
 
 class UserDetailView(LoginRequiredMixin, generic.DetailView):
-    model = User
-    template_name = 'account/user_detail.html'
+    model = get_user_model()
+    template_name = 'custom_account/user_detail.html'

@@ -8,7 +8,7 @@
             {% csrf_token %}
             <p>{{form.as_p}}</p>
             <input type="submit" value="Submit"/>
-            <a href="{% url 'account:dashboard' %}">See items</a>
+            <a href="{% url 'custom_account:dashboard' %}">See items</a>
         </form>
     </section>
 {% endblock %}

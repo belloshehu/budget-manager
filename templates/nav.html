@@ -4,13 +4,21 @@
             <li class="nav-item"><a class="nav-link" href="#">home</a></li>
             <li class="nav-item"><a class="nav-link" href="#">help</a></li>
             <li class="nav-item"><a class="nav-link" href="#">about us</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'account:dashboard' %}">my errands</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'custom_account:dashboard' %}">my errands</a></li>
             {% if user.authenticated %}
                 <li class="nav-item"><a class="nav-link" href="#">my errands</a></li>
             {% endif %}
         </ul>
+        <p>
+            <span>Hi {{user.username}}</span>
+            <img src="{{user.picture.url}}" alt="">
+        </p>
         <ul class="account-links">
-            <li class="btn-bordered-primary"><a class="nav-link" href="{% url 'account:login' %}">login</a></li>
+            {% if user.is_authenticated %}
+                <li class="btn-bordered-primary"><a class="nav-link" href="{% url 'account_logout' %}">logout</a></li>
+            {% else %}
+                <li class="btn-bordered-primary"><a class="nav-link" href="{% url 'account_login' %}">login</a></li>
+            {% endif %}
         </ul>
     </nav>
 {% endblock %}

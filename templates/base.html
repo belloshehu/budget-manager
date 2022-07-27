@@ -10,13 +10,14 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    {% block header%}
+    {% block header %}
         <header class="header">
             {% include "brand.html" %}
             {% include "search_form.html" %}
             {% include "nav.html" %}
         </header>
     {% endblock %}
+
     {% block content %} {% endblock %}
     <script src="{% static 'script.js' %}"></script>
 </body>

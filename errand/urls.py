@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from account.views import home as home_view
+from custom_account.views import home as home_view
 from django.conf.urls.static import static
 from .settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('account.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('custom-accounts/', include('custom_account.urls')),
     path('item/', include('item.urls')),
     path('sharing/', include('sharing.urls')),
     path('friendship/', include('friendship.urls')),

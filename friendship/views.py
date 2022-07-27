@@ -78,7 +78,7 @@ class CreateFriendshipRequest(View):
         """
         # create a friendship instance for a user with matching id
         friend_id = self.kwargs.get('friend_id')
-        friend = get_object_or_404(settings.AUTH_USER_MODEL, id=friend_id)
+        friend = get_object_or_404(get_user_model(), id=friend_id)
         friendship = Friendship.objects.create(user=request.user, friend=friend)
 
         # check if user has an existing request
@@ -116,14 +116,14 @@ class AcceptFriendshipRequest(View):
 
     def get(self, request, **kwargs):
         friend_id = self.kwargs.get('friend_id')
-        friend = get_object_or_404(settings.AUTH_USER_MODEL, id=friend_id)
+        friend = get_object_or_404(get_user_model(), id=friend_id)
         friendship = self.get_friendship()
         
         # update friendship
         friendship.status = 'AC'
         friendship.save()
         return HttpResponseRedirect( 
-            reverse('account:detail', kwargs={'pk':friend_id})
+            reverse('custom_account:detail', kwargs={'pk':friend_id})
         )
 
     def get_friendship(self):

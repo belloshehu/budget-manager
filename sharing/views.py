@@ -7,6 +7,9 @@ from item.models import Item
 from .forms import ShareForm
 from django.contrib.auth.models import User
 from friendship.models import Friendship
+from django.conf import settings
+from django.contrib.auth import get_user_model
+
 
 # Create your views here.
 class ShareCreateView(generic.CreateView):
@@ -24,7 +27,7 @@ class ShareCreateView(generic.CreateView):
         form = self.get_form_class()
 
         # get user queryset for active friends
-        active_friends_queryset = User.objects.filter(
+        active_friends_queryset = get_user_model().objects.filter(
             id__in=self.get_active_friends_ids()
         ).exclude(id__exact=request.user.id)
 

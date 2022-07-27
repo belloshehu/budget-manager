@@ -1,16 +1,16 @@
-{% extends 'base.html' %}
-
-{% block title %}tasks list{% endblock %}
+{% extends 'account/account_base.html' %}
+{% load static %}
+{% block title %}sign up{% endblock %}
 
 {% block content %}
     <section class="form-container">
         <h3>Sign up</h3>
-        <form action="{% url 'account:signup' %}" method="post">
+        <form action="{% url 'account_signup' %}" method="post">
             {% csrf_token %}
             <p>{{form.as_p}}</p>
             <input type="submit" value="Sign up"/>
         </form>
         <br>
-        <a href="{% url 'account:login' %}">Login</a>
+        <a href="{% url 'account_login' %}">Login</a>
     </section>
 {% endblock %}

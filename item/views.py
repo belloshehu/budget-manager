@@ -13,7 +13,7 @@ class ItemCreateView(generic.CreateView):
     model = Item
     form_class = ItemForm
     template_name = "item/item_form.html"
-    success_url = reverse_lazy('account:dashboard')
+    success_url = reverse_lazy('custom_account:dashboard')
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -31,7 +31,7 @@ class ItemDeleteView(generic.DeleteView):
     model = Item
 
     def get_success_url(self, *args, **kwargs):
-        return reverse('account:dashboard')
+        return reverse('custom_account:dashboard')
 
 
 class ItemListView(generic.ListView):

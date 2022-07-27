@@ -1,4 +1,4 @@
-{% extends "account/dashboard_base.html" %}
+{% extends "custom_account/dashboard_base.html" %}
 {% block content %}
     <section class="details-container padding-main-x">
         <header class="detail-header" style="margin-bottom: 20px;">
@@ -13,6 +13,9 @@
                 {% endif %}
             </div>
         </header>
-        <a href="{% url 'friendship:request' pk=request.user.id friend_id=user.id %}" class="btn-bordered-primary"><i class="fa-solid fa-share fa-xl"></i>Send friend request</a>
+        <a href="{% url 'friendship:request' pk=request.user.id friend_id=user.id %}" 
+            class="btn-bordered-primary">
+            <i class="fa-solid fa-share fa-xl"></i>Send friend request
+        </a>
     </section>
 {% endblock %}

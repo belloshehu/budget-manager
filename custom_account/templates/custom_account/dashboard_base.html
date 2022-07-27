@@ -11,7 +11,7 @@
                 {% block items_link %}
                     <li class="nav-item hover-border">
                         <i class="fa-solid fa-list fa-lg"></i>
-                        <a class="nav-link" href="{% url 'account:dashboard' %}">Items 
+                        <a class="nav-link" href="{% url 'custom_account:dashboard' %}">Items 
                             <span class="badge primary-bg secondary">{{items|length}}</span>
                         </a>
                         <a class="nav-link primary-color" href="{% url 'item:create' %}"> &plus; Add
@@ -22,7 +22,7 @@
                 {% block friendship_link %}
                     <li class="nav-item hover-border">
                         <i class="fa-solid fa-user-group"></i>
-                        <a class="nav-link" href="{% url 'account:friendship' %}">Friends
+                        <a class="nav-link" href="{% url 'custom_account:friendship' %}">Friends
                             <span class="badge primary-bg secondary">{{friendships|length}}</span>
                         </a>
                     </li>
@@ -30,7 +30,7 @@
                 {% block received_requests_link %}
                     <li class="nav-item hover-border">
                         <i class="fa-solid fa-circle-down"></i>
-                        <a class="nav-link" href="{% url 'account:received-requests' %}">Requests
+                        <a class="nav-link" href="{% url 'custom_account:received-requests' %}">Requests
                             <span class="badge primary-bg secondary">{{received_friendship_requests|length}}</span>
                         </a>
                     </li>
@@ -38,7 +38,7 @@
                 {% block sent_requests_link %}
                     <li class="nav-item hover-border">
                         <i class="fa-solid fa-paper-plane"></i>
-                        <a class="nav-link" href="{% url 'account:sent-requests' %}">Requests
+                        <a class="nav-link" href="{% url 'custom_account:sent-requests' %}">Requests
                             <span class="badge primary-bg secondary">{{sent_friendship_requests|length}}</span>
                         </a>
                     </li>

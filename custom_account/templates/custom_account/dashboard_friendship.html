@@ -1,10 +1,10 @@
-{% extends "account/dashboard_base.html" %}
+{% extends "custom_account/dashboard_base.html" %}
 
 <!-- make friendship link active -->
 {% block friendship_link %}
     <li class="nav-item active">
         <i class="fa-solid fa-user-group"></i>
-        <a class="nav-link" href="{% url 'account:friendship' %}">Friends
+        <a class="nav-link" href="{% url 'custom_account:friendship' %}">Friends
             <span class="badge primary-bg secondary">{{friendships|length}}</span>
         </a>
     </li>

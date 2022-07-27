@@ -1,10 +1,11 @@
 <form class="search-form" 
     action="{% url 'friendship:search' %}" 
     onsubmit=false>
-    <input type="search" 
-        placeholder="Enter friend's username"
-        name="username"
-        id="search-username"
-    />
-    <i class="fa-solid fa-lens"></i>
+    <div class="search-form-group">
+        <input type="search" 
+            placeholder="Enter friend's username"
+            name="username"
+        />
+        <i class="fas fa-search"></i>
+    </div>
 </form>

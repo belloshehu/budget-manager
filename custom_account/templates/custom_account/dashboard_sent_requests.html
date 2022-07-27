@@ -1,10 +1,10 @@
-{% extends "account/dashboard_base.html" %}
+{% extends "custom_account/dashboard_base.html" %}
 
 <!-- make friendship link active -->
 {% block sent_requests_link %}
 <li class="nav-item hover-border active">
     <i class="fa-solid fa-paper-plane"></i>
-    <a class="nav-link" href="{% url 'account:sent-requests' %}">Requests
+    <a class="nav-link" href="{% url 'custom_account:sent-requests' %}">Requests
         <span class="badge primary-bg secondary">{{sent_friendship_requests|length}}</span>
     </a>
 </li>

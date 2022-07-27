@@ -30,7 +30,7 @@
                     </article>
                 {% empty %}
                     <small> You don't have any active friend</small>
-                    <a href="{% url 'account:friendship' %}" class="btn-secondary">Manage friends</a>
+                    <a href="{% url 'custom_account:friendship' %}" class="btn-secondary">Manage friends</a>
                 {% endfor %}
             </section>
             <input type="submit" value="Ok">

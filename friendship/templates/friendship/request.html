@@ -5,7 +5,7 @@
         class=" shadow rounded"
         />
     <h4 class="primary review-author">
-        <a href="{% url 'account:detail' friendship_request.friendship.friend.id %}" class="btn-secondary">
+        <a href="{% url 'custom_account:detail' friendship_request.friendship.friend.id %}" class="btn-secondary">
             {{friendship_request.friendship.friend.username}}
         </a> |
         <span class="time warning">Since {{friendship_request.created_at|date:"M, d Y"}}</span>

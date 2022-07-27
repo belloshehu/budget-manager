@@ -3,5 +3,5 @@
         alt="{{user.username}}" 
         class="shadow rounded"
         />
-    <a href="{% url 'account:detail' user.id %}" class="btn-secondary">{{user.username}}</a>
+    <a href="{% url 'custom_account:detail' user.id %}" class="btn-secondary">{{user.username}}</a>
 </article>
