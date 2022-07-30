@@ -1,0 +1,12 @@
+{% extends 'email_base.html' %}
+
+{% block content %}
+    <h2 style="border-bottom: 2px solid orange;">Friend Request Accepted</h2>
+    <p>Hello {{receiver_username}},</p>
+    <p>
+        <strong style="text-transform: capitalize;">
+            {{friend.username}}
+        </strong>has accepted your request. Congratulations!
+    </p>
+    {% include 'friendship/email/friend.html' %}
+{% endblock %}

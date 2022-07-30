@@ -22,7 +22,7 @@
     --flex-grid-gap: 20px;
     --card-padding: 30px;
     --border-thickness-double: 10px;
-    --form-padding: 3%;
+    --form-padding: 10%;
 }
 
 ::-webkit-scrollbar{
@@ -275,7 +275,27 @@ header.dashboard {
 
 
 /* form */
+.form-heading-container {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 2% 10% 0%;
+    align-items: baseline;
+    border-radius: var(--border-radius) var(--border-radius) 0% 0%;
+}
 
+.form-heading-container h3 {
+    align-self: center;
+    color: var(--secondary-color);
+}
+.form-heading-container a {
+    text-decoration: underline;
+    color: white;  
+}
 input[type=submit] {
     display: block;
     background-color: var(--primary-color);
@@ -300,10 +320,12 @@ textarea {
 input[type=submit] {
     padding: 10px;
 }
-
+form, .form-alias{
+    padding: var(--form-padding);
+}
 .form-container {
     width: 100%;
-    padding: var(--form-padding);
+    /* padding: var(--form-padding); */
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;

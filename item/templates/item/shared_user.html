@@ -8,7 +8,7 @@
             <span class="time warning"> {{share.created_at|date:"M, d Y"}}</span>
         </h4> -->
         <h4 class="primary review-author">
-            <a href="{% url 'item:detail' share.id %}" class="btn-secondary">{{target_user.username}}</a> |
+            <a href="{% url 'custom_account:detail' target_user.id %}" class="btn-secondary">{{target_user.username}}</a> |
             <span class="time warning">Since {{share.created_at|date:"M, d Y"}}</span>
         </h4>
         <div class="align-self-left">

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from .models import Share
 from item.models import Item
@@ -9,10 +10,12 @@ from django.contrib.auth.models import User
 from friendship.models import Friendship
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.mail import EmailMessage
+from .utils  import send_email, get_target_users_email
 
 
 # Create your views here.
-class ShareCreateView(generic.CreateView):
+class ShareCreateView(LoginRequiredMixin, generic.CreateView):
     """
     View to allow user to share item with another user.
     """
@@ -63,21 +66,31 @@ class ShareCreateView(generic.CreateView):
         form.instance.user = self.request.user
         form.instance.item = Item.objects.get(id=self.kwargs.get('pk'))
         super().form_valid(form)
-        form.instance.target_users.set(User.objects.filter(id__in=form.cleaned_data.get('target_users')))
+        target_users = get_user_model().objects.filter(id__in=form.cleaned_data.get('target_users'))
+        form.instance.target_users.set(target_users)
+        form.save()
+        
+        context = {
+            "item": form.instance.item,
+            "request": self.request
+        }
+        # send email notification
+        send_email(
+            "Sharing Item",
+            get_target_users_email(target_users),
+            form.instance.item,
+            context,
+            "sharing/email/share_notification.html"
+        )
         return super().form_valid(form)
         
 
-class ShareDeleteView(generic.DeleteView):
+class ShareDeleteView(LoginRequiredMixin, generic.DeleteView):
     """
     View to unshare item with users.
     """
     model = Share
     context_object_name = 'share'
-
-    def get(self, request, *args, **kwargs):
-        print(kwargs.items())
-        return super().get(args, kwargs)
-        # return render(request, "sharing/share_delete_confirm.html", )
 
     def get_context_data(self, *args, **kwargs):
         """
@@ -92,7 +105,7 @@ class ShareDeleteView(generic.DeleteView):
         Query target user that an item will be unshared with.
         """
         target_user_object = get_object_or_404(
-                User, pk=self.kwargs.get('target_user_pk')
+                get_user_model(), pk=self.kwargs.get('target_user_pk')
         )
         return target_user_object
 
@@ -103,7 +116,25 @@ class ShareDeleteView(generic.DeleteView):
         """
         share = self.get_object()
         item_id = share.item.id
-        share.target_users.remove(self.get_target_user_object())
+        try:
+            target_user = self.get_target_user_object()
+            share.target_users.remove(self.get_target_user_object())
+            context = {
+                "item": share.item,
+                "request": self.request
+            }
+            # send email notification
+            print(target_user)
+            send_email(
+                "Unsharing Item",
+                [target_user.email],
+                share.item,
+                context,
+                "sharing/email/unshare_notification.html"
+            )
+        except Exception as e:
+            print(f'Error: { e}')
+
         if len(share.target_users.all()) == 0:
             # remove share instance when no target user is 
             # associated with it.

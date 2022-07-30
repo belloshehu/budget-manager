@@ -5,4 +5,6 @@
         {% include "brand.html" %}
     </header>
 {% endblock %}
-{% block content %}{% endblock %}
+{% block content %}
+<section class="form-container">{% block main %}{% endblock %}</section>
+{% endblock %}

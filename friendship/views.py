@@ -5,6 +5,14 @@ from .models import Friendship, FriendshipRequest
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.mail import EmailMessage
+from django.template import Context
+from django.template.loader import render_to_string, get_template
+# email import :
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from .utils import send_email
 
 
 # Create your views here.
@@ -18,7 +26,7 @@ class UnfriendView(generic.DeleteView):
     The user friendship instance with a friend is removed. 
     """
     model = Friendship
-    success_url = reverse_lazy('account:friendship')
+    success_url = reverse_lazy('custom_account:friendship')
     
 
 class BlockUnblockUserView(generic.UpdateView):
@@ -29,7 +37,7 @@ class BlockUnblockUserView(generic.UpdateView):
     model = Friendship
     template_name = "friendship/friendship_confirm_block_unblock.html"
     fields = ('blocked',)
-    success_url = reverse_lazy('account:friendship')
+    success_url = reverse_lazy('custom_account:friendship')
 
     def get(self, request, **kwargs):
         return render(
@@ -46,7 +54,7 @@ class BlockUnblockUserView(generic.UpdateView):
         else:
             object.blocked = True
         object.save()
-        return HttpResponseRedirect(reverse('account:friendship'))
+        return HttpResponseRedirect(reverse('custom_account:friendship'))
 
 
 def friend_search(request):
@@ -62,8 +70,8 @@ def friend_search(request):
         {"users": users, "username": request.GET.get('username')}
     )
 
-# Friendship Request views
 
+# Friendship Request views
 class CreateFriendshipRequest(View):
     """
     View to handle friendship request. 
@@ -84,12 +92,31 @@ class CreateFriendshipRequest(View):
         # check if user has an existing request
         friendship_requests = self.get_existing_friendship_requests()
         if friendship and len(friendship_requests)==0  and self.request.user.id != friend_id:
-            friend_request = FriendshipRequest.objects.create(friendship=friendship)
+            try:
+                friend_request = FriendshipRequest.objects.create(friendship=friendship)
+    
+                # send email notification to the target friend:
+                # friend to whom request is sent
+                receiver = friend_request.friendship.friend
+                context = {
+                    'friendship_request': friend_request,
+                    'request': self.request,
+                    'site_name': 'Errand',
+                    'receiver_username': receiver.username,
+                    'friend': friend_request.friendship.user
+                }
+                send_email(
+                    "Friend Request",
+                    [receiver.email],
+                    friend_request,
+                    context,
+                    "friendship/email/request_notification.html"
+                )
+            except Exception as e:
+                print(f'Error: {e}')
         friendship_requests = self.get_friendship_requests()
-        return render(
-            request,
-            self.template_name, 
-            {"friend_requests": friendship_requests}
+        return HttpResponseRedirect(
+            reverse('custom_account:sent-requests')
         )
 
     def get_existing_friendship_requests(self):
@@ -112,6 +139,7 @@ class CreateFriendshipRequest(View):
 class AcceptFriendshipRequest(View):
     """
     View to handle accepting user friendship request.
+    Email notification is sent to the user who made the request.
     """
 
     def get(self, request, **kwargs):
@@ -122,6 +150,28 @@ class AcceptFriendshipRequest(View):
         # update friendship
         friendship.status = 'AC'
         friendship.save()
+
+        # send email notification to the request isuer:
+        # friend to whom request was sent
+        friend_request = get_object_or_404(
+            FriendshipRequest, 
+            friendship__id=friendship.id
+        )
+        friend = friend_request.friendship.friend
+        context = {
+            'friendship_request': friend_request,
+            'request': self.request,
+            'site_name': 'Errand',
+            'receiver_username': friend_request.friendship.user.username,
+            'friend': friend
+        }
+        send_email(
+            "Request Accepted",
+            [friendship.user.email],
+            friend_request,
+            context,
+            "friendship/email/request_accepted.html"
+        )
         return HttpResponseRedirect( 
             reverse('custom_account:detail', kwargs={'pk':friend_id})
         )
@@ -135,3 +185,5 @@ class AcceptFriendshipRequest(View):
             friend__id=self.kwargs.get('friend_id'),
             user=self.request.user
         )
+    
+

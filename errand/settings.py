@@ -158,7 +158,25 @@ class Dev(Configuration):
     ACCOUNT_AUTHENTICATION_METHOD = 'email'
     ACCOUNT_EMAIL_VERIFICATION = False
 
+    #Account Email:
+    ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+    ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+    ACCOUNT_EMAIL_SUBJECT_PREFIX  = "Budget Manager"
+
+    # Account Login
+    ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+    ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+
     SITE_ID = 1
+
+    # Email config:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = "belloshehu1@gmail.com"
+    EMAIL_HOST_PASSWORD = "vrzjtkgkfpmpyxws"
+
     
     # client_id = 59307545249-3aoosvce98t12kjnan7iv98mkqn23g10.apps.googleusercontent.com
     # client_secret = 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
@@ -209,6 +227,8 @@ class Dev(Configuration):
             'VERSION': 'v13.0',
         }
     }
+
+    SITE_NAME = 'Errand'
 
 class Prod(Dev):
     """

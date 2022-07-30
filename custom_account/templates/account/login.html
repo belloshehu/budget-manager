@@ -1,34 +1,25 @@
-{% extends 'account/account_base.html' %}
+{% extends 'account/base.html' %}
 {% load static %}
 {% block title %}login{% endblock %}
-{% block content %}
-    <section class="form-container">
-        <h3>Login</h3>
-        <form action="{% url 'account_login' %}" method="post">
-            {% csrf_token %}
-            <p>{{form.as_p}}</p>
-            <input type="submit" value="Login"/>
-        </form>
+{% block main %}
+    <div class="form-heading-container">
+        <h3 class="secondary">Login</h3> 
+        <a href="{% url 'account_signup' %}">Sign Up</a>
+    </div>
+    <form action="{% url 'account_login' %}" method="post">
+        {% csrf_token %}
+        <p>{{form.as_p}}</p>
+        <input type="submit" value="Login"/>
         <div class="social-auth-container">
             <h5 style="color: white;">Or</h5>
             <article class="google provider">
                 <img class="provider-logo" src="{% static 'images/google-logo.png' %}" alt="">
                 <a href="{% url 'google_login' %}">Log in with Google</a>
             </article>
-            <!-- <article class="github provider">
-                <img class="provider-logo" src="{% static 'images/github-logo.png' %}" alt="">
-                <a href="{% url 'github_login' %}">Log in with Github</a>
-            </article>
-            <article class="facebook provider">
-                <img class="provider-logo" src="{% static 'images/github-logo.png' %}" alt="">
-                <a href="{% url 'facebook_login' %}">Log in with Facebook</a>
-            </article> -->
             <article>
                 <a href="{% url 'account_signup' %}">Signup</a>
                 | <a href="{% url 'account_reset_password' %}">Lost password?</a>
             </article>
         </div>
-
-        
-    </section>
+    </form>
 {% endblock %}

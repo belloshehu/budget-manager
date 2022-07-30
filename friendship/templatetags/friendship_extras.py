@@ -12,9 +12,10 @@ def request_status_action_tag(context, friendship):
     If request is incoming and pending, 'accept' and 'reject' actions are shown.
     """
     request = context['request']
-    accept_url = f"/friendship/accept/{friendship.friend.id}/"
+    accept_url = f"/friendship/accept/{friendship.user.id}/"
     reject_url = '#'
     delete_url = '#'
+    
     if friendship.friend == request.user:
         accept_reject_actions = format_html(
             """

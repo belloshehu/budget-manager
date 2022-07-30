@@ -1,12 +1,14 @@
-{% extends 'account/account_base.html' %}
+{% extends 'account/base.html' %}
 {% load static %}
 {% block title %}login{% endblock %}
 {% block content %}
     <section class="form-container">
-        <h3>Sign In via Google</h3>
-        <p>You are about to sign in using a third party account from Google.</p>
+        <div class="form-heading-container">
+            <h3>Sign In via Google</h3>
+        </div>
         <form action="{% url 'google_login' %}" method="post">
             {% csrf_token %}
+            <p >You are about to sign in using a third party account from Google.</p>
             <p>{{form.as_p}}</p>
             <input type="submit" value="Continue"/>
         </form>

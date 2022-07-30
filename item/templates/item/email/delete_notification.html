@@ -1,0 +1,10 @@
+{% extends 'email_base.html' %}
+
+{% block content %} 
+    <h3>Item sharing</h3>
+    <p>Hello dear,</p>
+    <p>{{item.owner.username}} deleted the following item:</p>
+    {% include 'item/email/item.html' %}
+{% endblock %}
+{% block footer %}
+{% endblock %}

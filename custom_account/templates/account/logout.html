@@ -1,14 +1,15 @@
-{% extends 'account/account_base.html' %}
+{% extends 'account/base.html' %}
 {% load static %}
 {% block title %}login{% endblock %}
-{% block content %}
-    <section class="form-container">
-        <h3>Logout</h3>
+{% block main %}
+    <div class="form-heading-container">
+        <h3 class="secondary">Logout</h3> 
+        <a href="/">home</a>
+    </div>
+    <form action="{% url 'account_logout' %}" method="post">
         <p>Are you sure you want to logout?</p>
-        <form action="{% url 'account_logout' %}" method="post">
-            {% csrf_token %}
-            <p>{{form.as_p}}</p>
-            <input type="submit" value="Logout"/>
-        </form>
-    </section>
+        {% csrf_token %}
+        <p>{{form.as_p}}</p>
+        <input type="submit" value="Logout"/>
+    </form>
 {% endblock %}

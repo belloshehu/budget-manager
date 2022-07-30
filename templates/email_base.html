@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+    </head>
+    <body>
+        <h1 style="color: orange;">{{site_name}}</h1>
+        <div
+            style="
+                padding: 5%; 
+                color: white;
+                background-color: rgb(0, 100, 100); 
+                 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                "
+        >
+            {% block content %}{% endblock %}
+
+            {% block footer %}
+                <div style="margin-top: 20px;">
+                    <a href="{{request.scheme}}://{{request.get_host}}{% url 'custom_account:received-requests' %}"
+                        style="
+                            text-decoration: none; 
+                            display: block; 
+                            color: rgb(0, 100, 100); 
+                            background-color: white;
+                            border-radius: 10px;
+                            padding: 10px 30px;
+                            width: fit-content;
+                            "      
+                    >Manage request
+                    </a>
+                </div>
+            {% endblock %}
+        </div>
+    </body>
+</html>

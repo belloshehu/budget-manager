@@ -1,16 +1,15 @@
-{% extends 'account/account_base.html' %}
+{% extends 'account/base.html' %}
 {% load static %}
 {% block title %}sign up{% endblock %}
 
-{% block content %}
-    <section class="form-container">
-        <h3>Sign up</h3>
-        <form action="{% url 'account_signup' %}" method="post">
-            {% csrf_token %}
-            <p>{{form.as_p}}</p>
-            <input type="submit" value="Sign up"/>
-        </form>
-        <br>
+{% block main %}
+    <div class="form-heading-container">
+        <h3 class="secondary">Sign up</h3> 
         <a href="{% url 'account_login' %}">Login</a>
-    </section>
+    </div>
+    <form action="{% url 'account_signup' %}" method="post">
+        {% csrf_token %}
+        <p>{{form.as_p}}</p>
+        <input type="submit" value="Sign up"/>
+    </form>
 {% endblock %}

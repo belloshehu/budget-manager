@@ -12,7 +12,7 @@
 
 {% block dashboard_content %}
     {% for friendship_request in received_friendship_requests %}
-       {% include "friendship/request.html" %}
+       {% include "friendship/received_request.html" %}
     {% empty %}
        <p>You have not received any friend request.</p>
     {% endfor %}

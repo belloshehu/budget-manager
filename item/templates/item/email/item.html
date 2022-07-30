@@ -1,0 +1,28 @@
+<article 
+    style="
+        border: 1px solid grey; 
+        padding: 2%; 
+        background-color: gray; 
+        width: fit-content;
+        border-radius: 20px;
+        text-align: center;"
+>
+    <img 
+        src="cid:item_image"
+        alt="{{item.name}}" 
+        style="border-radius: 20px;" 
+        width="200" 
+        height="150"
+    />
+    <h4 
+        style="
+            color: rgb(0, 100, 100); 
+        ">
+        <span
+            style="color: white;"
+            >
+            {{item.name}}
+        </span>|
+        {{item.created_at|date:"M, d Y"}}
+    </h4>
+</article>
