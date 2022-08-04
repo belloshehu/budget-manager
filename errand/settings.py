@@ -166,7 +166,7 @@ class Dev(Configuration):
     # Account Login
     ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
     ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
-
+    SITE_NAME = 'Errand'
     SITE_ID = 1
 
     # Email config:
@@ -174,7 +174,7 @@ class Dev(Configuration):
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_USE_TLS = True
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = "belloshehu1@gmail.com"
+    EMAIL_HOST_USER = belloshehu1@gmail.com>
     EMAIL_HOST_PASSWORD = "vrzjtkgkfpmpyxws"
 
     
@@ -228,7 +228,6 @@ class Dev(Configuration):
         }
     }
 
-    SITE_NAME = 'Errand'
 
 class Prod(Dev):
     """

@@ -1,24 +1,25 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'images/logo.png' %}">
-</head>
-<body style="padding: 5% 10%; background-color: orange;">
-    {% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Hello from Budget Manager!{% endblocktrans %}
-    {% load static %}
-    { % autoescape off% }
-        <img class="brand-logo" src="{% static 'images/logo.png' %}" />
-        <div class="primary-bg-color">{% block content %}{% endblock %}</div>
-
-        {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
-        Thank you for using Budget Manager!
-        {{ site_domain }}
-        {% endblocktrans %}
-    {% endautoescape %}
-</body>
-</html>
+{% extends 'email_base.html' %}
+{% block footer %}
+    <div style="margin-top: 20px;">
+        {% load i18n %}
+        <p>
+            {% autoescape off %}
+                {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+                    Thank you for using Errand!
+                {% endblocktrans %}
+            {% endautoescape %}
+        </p>
+        <a href="{{request.scheme}}://{{request.get_host}}"
+            style="
+                text-decoration: none; 
+                display: block; 
+                color: white; 
+                background-color: rgb(0, 100, 100);
+                border-radius: 10px;
+                padding: 10px 30px;
+                width: fit-content;
+                "      
+            >Visit Errand 
+        </a>
+    </div>
+{% endblock %}
