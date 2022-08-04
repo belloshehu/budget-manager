@@ -45,6 +45,7 @@ class Dev(Configuration):
     'sharing',
     'reviews',
     'friendship',
+    'budget',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
