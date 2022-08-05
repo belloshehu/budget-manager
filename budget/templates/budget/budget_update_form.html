@@ -1,16 +1,16 @@
 {% extends "custom_account/dashboard_base.html" %}
-{% block title %}update item{% endblock %}
+{% block title %}budget update{% endblock %}
 
 {% block content %}
     <section class="form-container">
         <div class="form-heading-container">
-            <h3>Update Item</h3>
+            <h3>Budget Update</h3>
         </div>
-        <form action="{% url 'item:update' item.id %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'budget:update' budget.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{form.as_p}}</p>
             <input type="submit" value="Submit"/>
-            <a href="{% url 'item:detail' item.id %}">Cancel</a>
+            <a href="{% url 'custom_account:dashboard' %}">Cancel</a>
         </form>
     </section>
 {% endblock %}

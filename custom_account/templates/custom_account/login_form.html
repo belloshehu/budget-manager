@@ -1,10 +1,13 @@
-{% extends 'base.html' %}
-
+{% extends "custom_account/dashboard_base.html" %}
 {% block title %}tasks list{% endblock %}
 
 {% block content %}
     <section class="form-container">
         <h3>Login</h3>
+        <div class="form-heading-container">
+            <h3 class="secondary">Login</h3> 
+            <a href="{% url 'account_signup' %}">Sign Up</a>
+        </div>
         <form action="{% url 'custom_account:login' %}" method="post">
             {% csrf_token %}
             <p>{{form.as_p}}</p>

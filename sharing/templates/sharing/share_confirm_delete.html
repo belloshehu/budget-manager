@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "custom_account/dashboard_base.html" %}
 {% block content %}
     <div class="form-container">
         <!-- <h3>Share item </h3> -->
@@ -7,8 +7,10 @@
                 {{error}}
             {% endfor %}
         </small>
-        <h3>You are unsharing:</h3>
-        <div>
+        <div class="form-heading-container">
+            <h3>You are unsharing:</h3>
+        </div>
+        <div style="padding: 50px;">
             {% include "sharing/share_item.html" with item=share.item %}
         </div>
 

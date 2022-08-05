@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "custom_account/dashboard_base.html" %}
 {% block content %}
     <div class="form-container">
         <!-- <h3>Share item </h3> -->
@@ -7,8 +7,10 @@
                 {{error}}
             {% endfor %}
         </small>
-        <p>You are sharing: <span class="primary"></span></p>
-        <div>
+        <div class="form-heading-container">
+            <h3>You are sharing:</h3>
+        </div>
+        <div style="padding: 50px;">
             {% include "sharing/share_item.html" %}
         </div>
 
@@ -18,7 +20,7 @@
             <ul id="selected-target-users">
 
             </ul>
-            <section class="target-users-container">
+            <section class="target-users-container" style="text-align: center;">
                 {% for target_user in target_users %}
                     <article class="target-user" onclick="()=>{console.log('hello')}">
                         <input id="checkbox-{{forloop.counter0}}" type="checkbox" name="target_users" value="{{target_user.id}}"/>

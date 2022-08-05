@@ -8,13 +8,14 @@
     <section class="dashboard-container">
         <aside class="">
             <ul class="item-aside">
-                {% block items_link %}
+                {% block budget_link %}
                     <li class="nav-item hover-border">
                         <i class="fa-solid fa-list fa-lg"></i>
-                        <a class="nav-link" href="{% url 'custom_account:dashboard' %}">Items 
-                            <span class="badge primary-bg secondary">{{items|length}}</span>
+                        <a class="nav-link" href="{% url 'custom_account:budgets' %}">Budgets 
+                            <span class="badge primary-bg secondary">{{budgets|length}}</span>
                         </a>
-                        <a class="nav-link primary-color" href="{% url 'item:create' %}"> &plus; Add
+                        <a class="nav-link primary-color" href="{% url 'budget:create' %}"> 
+                            &plus; New
                         </a>
                     </li>
                 {% endblock %}

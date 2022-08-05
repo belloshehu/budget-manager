@@ -124,7 +124,6 @@ class ShareDeleteView(LoginRequiredMixin, generic.DeleteView):
                 "request": self.request
             }
             # send email notification
-            print(target_user)
             send_email(
                 "Unsharing Item",
                 [target_user.email],

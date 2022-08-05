@@ -21,12 +21,12 @@ from .settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('allauth.urls')),
     path('custom-accounts/', include('custom_account.urls')),
     path('item/', include('item.urls')),
     path('sharing/', include('sharing.urls')),
     path('friendship/', include('friendship.urls')),
+    path('budget/', include('budget.urls')),
     path('', home_view)
 ]
 

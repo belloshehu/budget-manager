@@ -1,9 +1,11 @@
-{% extends "base.html" %}
+{% extends "custom_account/dashboard_base.html" %}
 {% block title %}new item{% endblock %}
 
 {% block content %}
     <section class="form-container">
-        <h3>New Item</h3>
+        <div class="form-heading-container">
+            <h3>New Item</h3>
+        </div>
         <form action="{% url 'item:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{form.as_p}}</p>

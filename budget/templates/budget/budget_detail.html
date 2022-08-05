@@ -1,0 +1,34 @@
+{% extends "custom_account/dashboard_base.html" %}
+{% block content %}
+    <section class="details-container padding-main-x">
+        <header class="detail-header" style="margin-bottom: 20px;">
+            <div class="detail-text-container">
+                <h2 class="detail-name">{{budget.name}}</h2>
+                <p>{{budget.description}}</p>
+            </div>
+            <div
+                style="display: flex; justify-content: space-around;">
+                <div>
+                    <h3 style="display: inline-block;">{{budget.item_set.all|length}} item{{budget.item_set.all|pluralize}}</h3>
+                    <a href="{% url 'item:create'%}" class="btn btn-small primary">
+                        <i class="fa-solid fa-plus fa-sm"></i> Add Item 
+                    </a>
+                </div>
+                <h3>{{budget.currency}}{{budget.get_total_cost|default:0}}</h3>
+                <small>{{budget.created_at.date}}</small>
+            </div>
+        </header>    
+        <article class="shared-users padding-main reviews-container">
+
+            {% for item in budget.item_set.all %}
+                {% include "item/item.html" %}
+            {% empty %}
+                <p>Item not shared yet.</p>
+            {% endfor %}
+        </article>
+
+        <hr>
+        <a href="{% url 'budget:update' budget.id %}" class="btn-bordered-primary"><i class="fa-solid fa-pencil fa-xl"></i>Edit</a>
+        <a href="{% url 'budget:delete' budget.id %}" class="btn primary"><i class="fa-solid fa-trash fa-xl"></i>Delete</a>
+    </section>
+{% endblock %}

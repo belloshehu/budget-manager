@@ -1,0 +1,9 @@
+<article class="budget">
+    <h3>{{budget.name}}</h3>
+    <div class="budget-body" style="color: grey;">
+        <h4>{{budget.item_set.all|length}} item{{budget.item_set.all|pluralize}}</h4>
+        <small class="date">{{budget.created_at.date}}</small>
+        <h4 class="color warning">{{budget.currency}}{{budget.get_total_cost|default:0}}</h4>
+    </div>
+    <a href="{% url 'budget:detail' budget.id %}" class="btn">detail...</a>
+</article>

@@ -6,12 +6,6 @@ from django.conf.urls.static import static
 
 app_name = 'custom_account'
 urlpatterns = [
-    # path(
-    #     'login/', 
-    #     auth_views.LoginView.as_view(template_name='custom_account/login_form.html'), 
-    #     name='login'
-    # ),
-    # path('signup/', views.signup, name='signup'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', views.profile, name='profile'),
     path('dashboard/', views.dashboard, name='dashboard'),
@@ -25,6 +19,11 @@ urlpatterns = [
         'dashboard-received-requests/',
         views.dashboard_received_friendship_requests, 
         name='received-requests'
+    ),
+    path(
+        'dashboard-budgets',
+        views.dashboard_budgets,
+        name='budgets'
     ),
     path(
         'user/<int:pk>/', 

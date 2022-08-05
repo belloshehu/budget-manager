@@ -611,6 +611,10 @@ input[type=search]{
     border-radius: var(--border-radius);
     text-decoration: none;
 }
+.btn-small {
+    font-size: small;
+}
+
 .btn-gray{
     color: grey;
     background-color: var(--secondary-color);
@@ -713,4 +717,18 @@ img.provider-logo{
     text-decoration: none;
     font-size: 1.2rem;
     color: white;
+}
+
+/* budget */
+article.budget {
+    background-color: aliceblue;
+    border-radius: 20px;
+    padding: 5%;
+    width: 100%;
+}
+div.budget-body {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
 }
