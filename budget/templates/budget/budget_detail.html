@@ -28,6 +28,7 @@
         </article>
 
         <hr>
+        <a href="{% url 'sharing:share-budget' budget.id %}" class="btn-bordered-primary"><i class="fa-solid fa-share fa-xl"></i>Share</a>
         <a href="{% url 'budget:update' budget.id %}" class="btn-bordered-primary"><i class="fa-solid fa-pencil fa-xl"></i>Edit</a>
         <a href="{% url 'budget:delete' budget.id %}" class="btn primary"><i class="fa-solid fa-trash fa-xl"></i>Delete</a>
     </section>

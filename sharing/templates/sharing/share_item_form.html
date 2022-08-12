@@ -14,7 +14,7 @@
             {% include "sharing/share_item.html" %}
         </div>
 
-        <form method="post" action="{% url 'sharing:share' item.id %}">
+        <form method="post" action="{% url 'sharing:share-item' item.id %}">
             {% csrf_token %}
             <h4 id=>with:</h4>
             <ul id="selected-target-users">

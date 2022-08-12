@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.urls import reverse
 from budget.models import Budget
+from django.contrib.contenttypes.fields import GenericRelation
+from sharing.models import Share
 
 
 class Comment(models.Model):
@@ -33,6 +35,7 @@ class Item(models.Model):
     photo = models.ImageField(upload_to='items')
     accepted = models.BooleanField(default=False)
     comments = models.ManyToManyField(Comment, blank=True)
+    shares = GenericRelation(Share)
 
     def __str__(self):
         return self.name

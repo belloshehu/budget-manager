@@ -101,7 +101,7 @@ class CreateFriendshipRequest(View):
                 context = {
                     'friendship_request': friend_request,
                     'request': self.request,
-                    'site_name': 'Errand',
+                    'site_name': settings.SITE_NAME,
                     'receiver_username': receiver.username,
                     'friend': friend_request.friendship.user
                 }
@@ -144,6 +144,7 @@ class AcceptFriendshipRequest(View):
 
     def get(self, request, **kwargs):
         friend_id = self.kwargs.get('friend_id')
+        print(friend_id)
         friend = get_object_or_404(get_user_model(), id=friend_id)
         friendship = self.get_friendship()
         
@@ -180,10 +181,11 @@ class AcceptFriendshipRequest(View):
         """
         Returns a friendship instance for a friend with matching id.
         """
+        print(self.kwargs.get('friend_id'), self.request.user.id)
         return get_object_or_404(
             Friendship, 
-            friend__id=self.kwargs.get('friend_id'),
-            user=self.request.user
+            user_id=self.kwargs.get('friend_id'), # sender: who sends request
+            friend_id=self.request.user.id # receiver: one who receives request
         )
     
 

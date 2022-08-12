@@ -167,7 +167,7 @@ class Dev(Configuration):
     # Account Login
     ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
     ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
-    SITE_NAME = 'Errand'
+    SITE_NAME = 'xpendio'
     SITE_ID = 1
 
     # Email config:

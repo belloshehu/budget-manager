@@ -14,10 +14,10 @@
 
         <i class="fa-solid fa-share fa-xl"></i>
         <strong>
-            Shared with {{item.share_set.all|share_length}} person{{item.share_set.all|pluralize}}
+            Shared with {{item.shares.all|share_length}} person{{item.shares.all|pluralize}}
         </strong>
         <article class="shared-users padding-main reviews-container">
-            {% for share in item.share_set.all %}
+            {% for share in item.shares.all %}
                 {% include "item/shared_user.html" %}
             {% empty %}
                 <p>Item not shared yet.</p>
@@ -38,7 +38,7 @@
             {% endfor %}
         </article>
         <hr>
-        <a href="{% url 'sharing:share' item.id %}" class="btn-bordered-primary"><i class="fa-solid fa-share fa-xl"></i>Share</a>
+        <a href="{% url 'sharing:share-item' item.id %}" class="btn-bordered-primary"><i class="fa-solid fa-share fa-xl"></i>Share</a>
         <a href="{% url 'item:update' item.id %}" class="btn-bordered-primary"><i class="fa-solid fa-pencil fa-xl"></i>Edit</a>
         <a href="{% url 'item:delete' item.id %}" class="btn primary"><i class="fa-solid fa-trash fa-xl"></i>Delete</a>
     </section>

@@ -1,0 +1,7 @@
+<article class="review">
+    <h4 class="primary review-author">
+        <a href="{% url 'budget:detail' budget.id %}" class="btn-secondary">{{budget.name}}</a>|
+        <span class="time warning">{{item.created_at|date:"M, d Y"}}</span>
+    </h4>
+    {% include "budget/budget.html" with shared_with_users=budget.shares.all %}
+</article>

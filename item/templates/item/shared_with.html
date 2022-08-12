@@ -2,7 +2,7 @@
 <ul class="shared-with-items">
     <!-- <li>Shared with {{item.share_set.all|length}} person{{item.share_set.all|pluralize}}:</small>
      -->
-    <i class="fa-solid fa-share-nodes"> shared: {{item.share_set.all|share_length}} </i>
+    <i class="fa-solid fa-share-nodes"> shared: {{item.shares.all|share_length}} </i>
     {% for shared_with_user in shared_with_users  %}
         <li class="btn-gray shared-with-item">{{shared_with_user.target_user.username}}</li>
     {% endfor %}

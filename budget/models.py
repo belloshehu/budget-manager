@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
+from django.contrib.contenttypes.fields import GenericRelation
+from sharing.models import Share
 
 
 class Budget(models.Model):
@@ -19,6 +21,7 @@ class Budget(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     currency = models.CharField(max_length=1, choices=CURRENCY, default='N')
+    shares = GenericRelation(Share)
 
     def __str__(self):
         return self.name

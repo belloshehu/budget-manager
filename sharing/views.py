@@ -12,15 +12,19 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMessage
 from .utils  import send_email, get_target_users_email
+from budget.models import Budget
 
 
-# Create your views here.
-class ShareCreateView(LoginRequiredMixin, generic.CreateView):
+class ShareItemView(LoginRequiredMixin, generic.CreateView):
     """
     View to allow user to share item with another user.
     """
     model = Share
     fields = ('target_users',)
+    shared_model = Item # model of the item/budget to be shared
+    email_subject = "Sharing Item"
+    template_name = 'sharing/share_item_form.html'
+    item_key = "item"
 
     def get_success_url(self, *args, **kwargs):
         return reverse('item:detail', kwargs={'pk': self.kwargs.get('pk')})
@@ -39,9 +43,9 @@ class ShareCreateView(LoginRequiredMixin, generic.CreateView):
         form.base_fields['target_users'].queryset = active_friends_queryset
         return render(
             request,
-            "sharing/share_form.html", 
+            self.template_name, 
             {
-                'item':item, 
+                self.item_key:self.get_shared_object(), 
                 'form': form,
                 'active_friendships': self.get_active_friendships(),
                 'target_users': active_friends_queryset
@@ -61,29 +65,53 @@ class ShareCreateView(LoginRequiredMixin, generic.CreateView):
         """
         friends_ids = [ friendship.friend.id for friendship in self.get_active_friendships()]
         return friends_ids
-    
-    def form_valid(self, form):
+    def add_instance_properties(self, form):
+        """
+        Defines user, target_users and content_object
+        properties of the Share Model instance.
+        """
         form.instance.user = self.request.user
-        form.instance.item = Item.objects.get(id=self.kwargs.get('pk'))
-        super().form_valid(form)
+        # form.instance.item = Item.objects.get(id=self.kwargs.get('pk'))
+        form.instance.content_object = self.get_shared_object()
+        # super().form_valid(form)
         target_users = get_user_model().objects.filter(id__in=form.cleaned_data.get('target_users'))
         form.instance.target_users.set(target_users)
         form.save()
-        
+
+    def form_valid(self, form): 
+        self.add_instance_properties(form)
+
         context = {
-            "item": form.instance.item,
+            "item": self.get_shared_object(),
             "request": self.request
         }
         # send email notification
         send_email(
-            "Sharing Item",
+            self.email_subject,
             get_target_users_email(target_users),
-            form.instance.item,
+            self.get_shared_object(),
             context,
             "sharing/email/share_notification.html"
         )
         return super().form_valid(form)
+
+    def get_shared_object(self):
+        """
+        Returns item to be shared
+        """
+        return get_object_or_404(self.shared_model, id=self.kwargs.get('pk'))
         
+
+class ShareBudgetView(ShareItemView):
+    """
+    View for sharing Budget with friends.
+    """
+    model = Share
+    shared_model = Budget
+    email_subject = "Sharing Budget"
+    template_name = 'sharing/share_budget_form.html'
+    item_key = "budget"
+
 
 class ShareDeleteView(LoginRequiredMixin, generic.DeleteView):
     """
