@@ -1,3 +1,6 @@
+
+console.log(window.scrollY+window.innerHeight)
+const header = document.querySelector('header');
 const targetUserNames = document.getElementsByClassName('target-user');
 const selectedTargetUsersList = document.querySelector('#selected-target-users')
 
@@ -40,3 +43,28 @@ function createTargetUserItem(label, index){
     return li
 }
 
+window.onscroll = (e)=>{
+    if(window.scrollY > 0){
+        header.style.backgroundColor = 'white';
+    }else{
+        header.style.backgroundColor = '#dcdcdc';
+        header.style.boxShadow = '0px 1px 2px gray'
+    }
+}
+
+const barsIcon = document.querySelector('header .fa-bars');
+const navBar = document.querySelector('header nav');
+// Display modal when nav-bar icon is clicked
+let clicked = false;
+barsIcon.onclick = ()=>{
+    if (clicked){
+        navBar.setAttribute('class', 'hide-nav-modal');
+        clicked = false;
+        console.log('hide')
+    }else{
+        navBar.setAttribute('class', 'show-nav-modal');
+        clicked = true;
+        console.log('show')
+    }
+    
+}

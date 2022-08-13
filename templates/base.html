@@ -15,10 +15,15 @@
             {% include "brand.html" %}
             {% include "search_form.html" %}
             {% include "nav.html" %}
+            <i class="fas fa-bars"></i>
         </header>
     {% endblock %}
 
-    {% block content %} {% endblock %}
-    <script src="{% static 'script.js' %}"></script>
+    <main>{% block content %} {% endblock %}</main>
+    {% block script %}<script src="{% static 'script.js' %}"></script>{% endblock %}
+    <footer>
+        {% include 'brand.html' %}
+        <p>&copy;2022 Xpendio all right reserved</p>
+    </footer>
 </body>
 </html>
