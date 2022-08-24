@@ -14,5 +14,10 @@
 {% block dashboard_content %}
     {% for budget in  budgets %}
         {% include "budget/budget.html" %}
+    {% empty %}
+        <div style="text-align: center; margin: auto;">
+            <p>You don't have budgets yet. </p>
+            <a class="btn-bordered-primary nav-link" href="{% url 'budget:create' %}"> &plus; Create</a>
+        </div>
     {% endfor %}
 {% endblock %}

@@ -13,6 +13,10 @@
 {% block dashboard_content %}
     {% for friendship in  friendships %}
         {% include "friendship/friend.html" with friend=friendship %}
+    {% empty %}
+        <div style="text-align: center; margin: auto; ">
+            <h4>You don't have friends yet.</h4>
+            <p>Search for friends and send them friendship requests</p>
+        </div>
     {% endfor %}
-
 {% endblock %}

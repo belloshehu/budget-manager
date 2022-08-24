@@ -65,6 +65,7 @@ class ShareItemView(LoginRequiredMixin, generic.CreateView):
         """
         friends_ids = [ friendship.friend.id for friendship in self.get_active_friendships()]
         return friends_ids
+    
     def add_instance_properties(self, form):
         """
         Defines user, target_users and content_object

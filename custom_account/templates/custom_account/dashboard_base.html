@@ -1,12 +1,29 @@
 {% extends "base.html" %}
-{% block header %}
-    <header class="padding-main-x secondary-bg" style="padding-top: 10px;">
-        {% include "brand.html" %}
-    </header>
-{% endblock %}
+{% load  account_extras %}
 {% block content %}
     <section class="dashboard-container">
-        <aside class="">
+        <aside class="aside-dashboard">
+            <h4 class="tab-title" style="display: inline-block; color: white;">
+                <!-- check if the path matches a given path -->
+                {% if request.path|get_route == "dashboard-received-requests" %}
+                    Received requests({{received_friendship_requests|length}}): 
+                {% elif request.path|get_route == "dashboard-sent-requests" %}
+                    Sent requests({{sent_friendship_requests|length}}): 
+                {% elif request.path|get_route == "dashboard-budgets" %}
+                    Budgets({{budgets|length}}): 
+                    <a 
+                        style="color: white;" 
+                        class="nav-link secondary-color btn-bordered-secondary" 
+                        href="{% url 'budget:create' %}"
+                    > 
+                        &plus; Create
+                    </a>
+                {% elif request.path|get_route == "dashboard-friendships" %}
+                    Friends ({{friendships|length}}): 
+                {% endif %}
+            </h4>
+            
+            <!-- {% include 'brand.html' %}
             <ul class="item-aside">
                 {% block budget_link %}
                     <li class="nav-item hover-border">
@@ -44,12 +61,23 @@
                         </a>
                     </li>
                 {% endblock %}
-            </ul>
+            </ul> -->
         </aside>
         <div>
-            <header class="dashboard primary-bg">
-                
-            </header>
+            <!-- <header class="dashboard primary-bg">
+                <i class="fas fa-bars"></i>
+                <small style="color: orange;">
+                    {% if friendships %}
+                        {{friendships|length}}
+                    {% elif sent_friendship_requests %}
+                        You have sent {{sent_friendship_requests|length}} friend request{{sent_friendship_requests|pluralize}}
+                    {% elif received_friendship_requests %}
+                        You have received {{received_friendship_requests|length}} friend request{{received_friendship_requests|pluralize}}
+                    {% elif budgets %}
+                        You {{budgets|length}} budget{{budgets|pluralize}}
+                    {% endif %}
+                </small>
+            </header> -->
             <main class="items-main reviews-container padding-main-bottom padding-main-x overflow-y">
                 {% block dashboard_content %}{% endblock %}
             </main>

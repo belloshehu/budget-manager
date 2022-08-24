@@ -21,7 +21,7 @@ urlpatterns = [
         name='received-requests'
     ),
     path(
-        'dashboard-budgets',
+        'dashboard-budgets/',
         views.dashboard_budgets,
         name='budgets'
     ),
