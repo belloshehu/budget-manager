@@ -3,3 +3,4 @@ db.sqlite3
 __pycache__
 media
 client_credentials
+env_settings.py

@@ -12,23 +12,22 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from configurations import Configuration, values
+import env_settings
 
 class Dev(Configuration):
+    env_settings.set_envs()
     # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
     # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = '09onf5dn3qp+r6urhm^q*k1*+c8%+zmq&1%7!+nm48adx$mq)w'
-
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     # SECURITY WARNING: don't run with debug turned on in production!
+
     DEBUG = values.BooleanValue(True)
-
     ALLOWED_HOSTS = values.ListValue(['*'])
-
 
     # Application definition
 
@@ -162,7 +161,7 @@ class Dev(Configuration):
     #Account Email:
     ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
     ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-    ACCOUNT_EMAIL_SUBJECT_PREFIX  = "Budget Manager"
+    ACCOUNT_EMAIL_SUBJECT_PREFIX  = "Xpendio"
 
     # Account Login
     ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
@@ -175,13 +174,9 @@ class Dev(Configuration):
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_USE_TLS = True
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = "belloshehu1@gmail.com"
-    EMAIL_HOST_PASSWORD = "vrzjtkgkfpmpyxws"
-
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     
-    # client_id = 59307545249-3aoosvce98t12kjnan7iv98mkqn23g10.apps.googleusercontent.com
-    # client_secret = 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
-
     SOCIALACCOUNT_PROVIDERS = {
         "github": {
             # For each provider, you can choose whether or not the
