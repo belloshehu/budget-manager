@@ -71,11 +71,12 @@ class ShareItemView(LoginRequiredMixin, generic.CreateView):
         Defines user, target_users and content_object
         properties of the Share Model instance.
         """
-        form.instance.user = self.request.user
+        # form.instance.user = self.request.user
         # form.instance.item = Item.objects.get(id=self.kwargs.get('pk'))
         form.instance.content_object = self.get_shared_object()
         # super().form_valid(form)
         target_users = get_user_model().objects.filter(id__in=form.cleaned_data.get('target_users'))
+        print('users', target_users)
         form.instance.target_users.set(target_users)
         form.save()
 

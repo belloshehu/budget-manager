@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic 
 from item.models import Item
 from item.forms import ItemForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .utils import send_email, get_target_users_email
+from django.http import HttpResponseRedirect, HttpResponse
+from budget.models import Budget
 
 
 # Create your views here.
@@ -18,9 +20,35 @@ class ItemCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "item/item_form.html"
     success_url = reverse_lazy('custom_account:dashboard')
 
+    def get(self, request, *args, **kwargs):
+        # super().get(request, *args, **kwargs)
+        return render(
+            request, 
+            self.template_name, 
+            {'budget': self.get_budget(), 'form': self.form_class}
+        )
+
     def form_valid(self, form):
-        form.instance.owner = self.request.user
+        """
+        define the budget for the item instance
+        """
+        form.instance.budget = self.get_budget()
+        form.save()
         return super().form_valid(form)
+
+
+    def get_budget(self):
+        """
+        Return an instance of budget
+        """
+        print(self.kwargs.get('budget_id'))
+        return get_object_or_404(Budget, id=self.kwargs.get('budget_id'))
+     
+
+
+    # def form_valid(self, form):
+    #     form.instance.owner = self.request.user
+    #     return super().form_valid(form)
 
     
 class ItemDetailView(generic.DetailView):

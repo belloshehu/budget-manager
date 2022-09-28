@@ -5,7 +5,8 @@
 }
 :root{
     --color-light-gray: #dcdcdc;
-    --primary-color: rgb(0, 100, 100);
+    /* --primary-color: rgb(0, 100, 100); */
+    --primary-color: rgb(150, 15, 150);
     --secondary-color: white;
     --danger-color: rgb(177, 7, 7);
     --padding: 10px;
@@ -24,6 +25,7 @@
     --card-padding: 30px;
     --border-thickness-double: 10px;
     --form-padding: 10%;
+    --transition: all 0.3s linear;
 }
 
 ::-webkit-scrollbar{
@@ -101,7 +103,9 @@ body{
 }
 main {
     grid-area: main;
-    padding-top: 15%;
+    padding-top: 25%;
+    text-align: center;
+    padding-bottom: var(--margin);
 }
 /* Table */
 .table tr, .table td, .table th {
@@ -178,27 +182,50 @@ header.dashboard {
 
 /* landing */
 .landing {
-    /* display: grid;
-    grid-template-columns: 1fr; */
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; */
+    row-gap: 40px;
     padding: var(--main-padding);
+    transition: var(--transition);
 }
 
+.landing article:nth-child(2) {
+    position: relative;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .landing-title {
     font-size: 35px;
     color: var(--primary-color);
 }
+
 .landing-body{
     margin-top: 2%;
 }
 .landing-image {
-    width: 100%;
-    height: 80%;
-    /* animation: zoom 2s linear infinite; */
+    position: absolute;
+    display: block;
+    width: 300px;
+    height: 300px;
+    top: calc(50% - 150px);
+    transition: var(--transition);
+    animation: spin 10s linear infinite;
 }
 
+.inner-image {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 200px;
+    height: 200px;
+    top: calc(50% - 100px);
+}
 /* errand */
 .errand-text {
     text-align: left;
@@ -323,7 +350,7 @@ input[type=password],
 input[type=search], 
 select, 
 textarea {
-    border-radius: var(--border-radius);
+    border-radius: 0;
     border: none;
     padding: 15px 20px;
     /* box-shadow: 1px -1px 1px 1px gray; */
@@ -341,20 +368,18 @@ input[type=submit] {
     padding: 7px 15px;
     width: fit-content;
 }
-form, .form-alias{
-    padding: var(--form-padding);
-}
+
 form.search-form{
     padding: 0%;
     align-self: center;
 }
 .form-container {
-    width: 100%;
     /* padding: var(--form-padding); */
     margin-bottom: 5%;
     margin-left: auto;
     margin-right: auto;
-    border-radius: var(--border-radius);    
+    border-radius: var(--border-radius);   
+    text-align: left;
 }
 
 .search-form-group{
@@ -499,7 +524,8 @@ aside.aside-dashboard {
 .form-container {
     width: 90%;
     /* box-shadow: 0px 0px 1px 1px gray; */
-    background-color: rgba(100, 100, 100, 0.3);
+    /* background-color: rgba(100, 100, 100, 0.3); */
+    background-color: rgba(150, 150, 150, 0);
 }
 
 /* active */
@@ -558,6 +584,15 @@ nav .brand{
 nav ul{
     list-style: none;
 }
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg) scale(0.92);
+    }
+    to {
+        transform: rotate(360deg) scale(1);
+    }
+}
 @media screen and (min-width:698px) {
     header.dashboard {
         vertical-align: middle;
@@ -590,7 +625,10 @@ nav ul{
         align-items: center;
         font-size: var(--nav-link-font-size);
     }
-
+    main{
+        text-align: left;
+        padding-top: var(100px);
+    }
     /* .account-links */
     .account-links{
         border-top: none;
@@ -626,10 +664,12 @@ nav ul{
 
     /* landing */
     .landing {
-        flex-direction: row;
+        /* flex-direction: row;
         justify-content: space-around;
-        align-items: center;
+        align-items: center; */
+        grid-template-columns: repeat(2, 1fr);
         padding-top: var(--main-padding);
+        
     }
 
     /* anchors */
@@ -649,6 +689,25 @@ nav ul{
 
     .landing-title {
         font-size: 50px;
+    }
+    
+    .inner-image {
+        position: absolute;
+        z-index: 2;
+        width: 300px;
+        height: 300px;
+        left: calc(50% - 150px);
+        top: calc(50% - 150px);
+        margin: auto;
+    }
+    .landing-image{
+        position: absolute;
+        z-index: 2;
+        margin: auto;
+        width: 500px;
+        height: 500px;
+        top: calc(50% - 250px);
+        left: calc(50% - 250px);
     }
     /* errand */
     .errand-description{
@@ -715,6 +774,15 @@ nav ul{
         padding: var(--padding);
         margin: var(--margin) auto;
     } 
+
+    /* form */
+    form, .form-alias{
+        padding: var(--form-padding);
+    }
+    .form-container{
+        border: 1px solid gray;
+        background-color: rgba(255, 255, 255, 0.1)
+    }
 }
 /* overflows: anything overflow is here */
 .overflow-y{

@@ -22,5 +22,5 @@ class Share(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     def __str__(self):
-        return f"{self.item.name} from {self.item.owner.username}"
+        return f"{self.pk}"
 

@@ -6,5 +6,5 @@ class ItemForm(forms.ModelForm):
 
     class Meta:
         model = Item
-        exclude = ('owner', 'comments')
+        exclude = ('comments', 'budget')
 

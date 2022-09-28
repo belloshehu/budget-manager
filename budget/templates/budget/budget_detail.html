@@ -10,7 +10,7 @@
                 style="display: flex; justify-content: space-around;">
                 <div>
                     <h3 style="display: inline-block;">{{budget.item_set.all|length}} item{{budget.item_set.all|pluralize}}</h3>
-                    <a href="{% url 'item:create'%}" class="btn btn-small primary">
+                    <a href="{% url 'item:create' budget.id %}" class="btn btn-small primary">
                         <i class="fa-solid fa-plus fa-sm"></i> Add Item 
                     </a>
                 </div>
